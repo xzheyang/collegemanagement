@@ -16,13 +16,41 @@
     <mvc:annotation-driven></mvc:annotation-driven>
 
     <!-- 扫描controller -->
-    <context:component-scan base-package="system.lesson.controller"/>
+    <context:component-scan base-package="www"/>
 
 
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+
+    <!--           shiro的web配置                         -->
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    <!-- 开启Shiro注解 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+    <!-- shiro没有权限是直接抛出异常,所以需要拦截 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">
+                    redirect:no_permission.jsp
+                </prop>
+                <prop key="org.apache.shiro.authz.UnauthenticatedException">
+                    redirect:login_user.jsp
+                </prop>
+            </props>
+        </property>
     </bean>
 
 

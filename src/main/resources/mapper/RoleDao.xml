@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.lesson.system.dao.RoleDao">
+
+    <resultMap id="BaseResultMap" type="Role">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="role" jdbcType="VARCHAR" property="role" />
+        <result column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id, role, permission_id
+    </sql>
+
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from role
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from role
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="Role">
+        insert into role (id, role, permission_id
+        )
+        values (#{id,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{permissionId,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="Role">
+        insert into role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+            <if test="permissionId != null">
+                permission_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionId != null">
+                #{permissionId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByIdSelective" parameterType="Role">
+        update role
+        <set>
+            <if test="role != null">
+                role = #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionId != null">
+                permission_id = #{permissionId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateById" parameterType="Role">
+        update role
+        set role = #{role,jdbcType=VARCHAR},
+        permission_id = #{permissionId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>

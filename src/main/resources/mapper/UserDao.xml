@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.lesson.system.dao.UserDao">
+
+        <resultMap id="BaseResultMap" type="User">
+            <id column="id" jdbcType="VARCHAR" property="id" />
+            <result column="password" jdbcType="VARCHAR" property="password" />
+            <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+            <result column="isblock" jdbcType="BIT" property="isBlock" />
+
+
+        </resultMap>
+
+        <sql id="Base_Column_List">
+            id, password, role_id, isblock
+        </sql>
+
+        <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+            select
+            <include refid="Base_Column_List" />
+            from user
+            where id = #{id,jdbcType=VARCHAR}
+        </select>
+
+        <delete id="deleteById" parameterType="java.lang.String">
+            delete from user
+            where id = #{id,jdbcType=VARCHAR}
+        </delete>
+
+        <insert id="insert" parameterType="User">
+            insert into user (id, password, role_id,
+            isblock)
+            values (#{id,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
+            #{isblock,jdbcType=BIT})
+        </insert>
+
+        <insert id="insertSelective" parameterType="User">
+            insert into user
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">
+                    id,
+                </if>
+                <if test="password != null">
+                    password,
+                </if>
+                <if test="roleId != null">
+                    role_id,
+                </if>
+                <if test="isblock != null">
+                    isblock,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">
+                    #{id,jdbcType=VARCHAR},
+                </if>
+                <if test="password != null">
+                    #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="roleId != null">
+                    #{roleId,jdbcType=VARCHAR},
+                </if>
+                <if test="isblock != null">
+                    #{isblock,jdbcType=BIT},
+                </if>
+            </trim>
+        </insert>
+
+
+        <update id="updateByIdSelective" parameterType="User">
+            update user
+            <set>
+                <if test="password != null">
+                    password = #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="roleId != null">
+                    role_id = #{roleId,jdbcType=VARCHAR},
+                </if>
+                <if test="isblock != null">
+                    isblock = #{isblock,jdbcType=BIT},
+                </if>
+            </set>
+            where id = #{id,jdbcType=VARCHAR}
+        </update>
+
+        <update id="updateById" parameterType="User">
+            update user
+            set password = #{password,jdbcType=VARCHAR},
+            role_id = #{roleId,jdbcType=VARCHAR},
+            isblock = #{isblock,jdbcType=BIT}
+            where id = #{id,jdbcType=VARCHAR}
+        </update>
+
+
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+
+">
+
+
+    <!--
+
+   *****************基本功能与支持******************************
+
+   -->
+
+
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="cacheManager" ref="cacheManager" />
+        <!--session的失效时长，单位毫秒-->
+        <property name="globalSessionTimeout" value="#{1000*60*60*24*1}"/> <!--1天-->
+        <!--删除失效的session-->
+        <property name="deleteInvalidSessions" value="true"/>
+    </bean>
+
+    <!-- EH缓存管理器-->
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:cache/shiro-ehcache.xml"/>
+    </bean>
+
+
+    <!-- 配置自定义Realm -->
+    <bean id="UserRealm" class="www.lesson.shiro.realm.UserRleam"/>
+
+
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--注入缓存管理器,必须放在首位-->
+        <property name="cacheManager" ref="cacheManager"/>
+        <!-- 注入realm -->
+        <property name="realm" ref="UserRealm"/>
+        <!-- 注入会话管理器 -->
+        <property name="sessionManager" ref="sessionManager" />
+        <!-- 注入rememberMe   不使用Remember,因为安全性较低
+        <property name="rememberMeManager" ref="rememberMeManager" />-->
+    </bean>
+
+    <!-- Shiro过滤器 核心-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- Shiro的核心安全接口,这个属性是必须的 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 身份认证失败，则跳转到登录页面的配置 -->
+        <property name="loginUrl" value="/loginUser"/>
+        <!-- 权限认证失败，则跳转到指定页面 -->
+        <property name="unauthorizedUrl" value="/no_permission.jsp"/>
+        <!-- filter链 -->
+        <property name="filters">
+            <map>
+
+            </map>
+        </property>
+
+        <!-- Shiro连接约束配置,即过滤链的定义 -->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--anon 表示匿名访问，不需要认证以及授权-->
+
+                <!--authc表示需要认证 没有进行身份认证是不能进行访问的-->
+
+
+                <!-- 权限 -->
+
+                /student=authc,roles[student]
+
+
+                <!--清除session,退出登录-->
+                /logout=logout
+
+
+            </value>
+        </property>
+
+    </bean>
+
+
+</beans>

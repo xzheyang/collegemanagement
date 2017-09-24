@@ -1,0 +1,45 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         name="ehcache1"
+>
+    <!--diskStore：缓存数据持久化的目录 地址  -->
+    <diskStore path="F:\Idea_Space\develop\ehcache" />
+    <defaultCache
+            maxElementsInMemory="1000"
+            maxElementsOnDisk="10000000"
+            eternal="false"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+    <cache name="authorizationCache"
+           maxElementsInMemory="2000"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="180"
+           timeToLiveSeconds="180"
+           diskPersistent="true"
+           diskExpiryThreadIntervalSeconds="3600"/>
+
+    <cache name="authenticationCache"
+           maxElementsInMemory="2000"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="180"
+           timeToLiveSeconds="180"
+           diskExpiryThreadIntervalSeconds="3600"/>
+
+    <cache name="activeSessionCache"
+           maxElementsInMemory="2000"
+           overflowToDisk="true"
+           eternal="true"
+           timeToLiveSeconds="180"
+           timeToIdleSeconds="180"
+           diskExpiryThreadIntervalSeconds="1800"/>
+
+
+
+</ehcache>
