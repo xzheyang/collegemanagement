@@ -8,7 +8,7 @@ public class Teacher {
 
     private String userName;
 
-    private Boolean isMan;
+    private Boolean woman;
 
     private String birthday;
 
@@ -35,12 +35,12 @@ public class Teacher {
         this.userName = userName;
     }
 
-    public Boolean getMan() {
-        return isMan;
+    public Boolean getWoman() {
+        return woman;
     }
 
-    public void setMan(Boolean man) {
-        isMan = man;
+    public void setWoman(Boolean is) {
+        woman = is;
     }
 
     public String getBirthday() {

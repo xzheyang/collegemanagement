@@ -8,4 +8,10 @@ public class MD5Util {
         return new Md5Hash(password, salt).toString();
     }
 
+
+    public static void main(String[] args) {
+        System.out.println("fuck"+getPassword("1","1"));
+    }
+
+
 }

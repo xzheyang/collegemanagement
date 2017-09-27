@@ -8,14 +8,17 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import www.lesson.pojo.Student;
 import www.lesson.pojo.User;
 import www.lesson.system.dao.RoleDao;
 import www.lesson.system.dao.UserDao;
 
+import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class UserRleam extends AuthorizingRealm {
 
     @Autowired
@@ -26,11 +29,14 @@ public class UserRleam extends AuthorizingRealm {
 
     //权限授予
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        String id = principalCollection.getPrimaryPrincipal().toString() ;
+        String userId = principalCollection.getPrimaryPrincipal().toString() ;
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo() ;
 
         Set<String> roleName = new HashSet<String>();
-        roleName.add(roleDao.selectById(id).getRole()) ;
+
+        //这里一个数据库只有三个角色且只能有一个角色,所以比较畸形
+        String roleId = userDao.selectById(userId).getRoleId();
+        roleName.add(roleDao.selectById(roleId).getRole()) ;
         Set<String> permissions = new HashSet<String>();    //这里使用单角色,并先不使用permissions
 
         info.setRoles(roleName);
@@ -52,7 +58,7 @@ public class UserRleam extends AuthorizingRealm {
             throw new LockedAccountException(); //帐号锁定
         }
 
-            //将查询到的用户账号和密码存放到 authenticationInfo用于后面的权限判断,第三个是验证的盐,第四个参数是Ream名。
+            //将查询到的用户账号和密码存放到 authenticationInfo用于后面的权限判断,第三个是验证的盐(配置匹配器才起作用),第四个参数是Ream名。
             AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                     user.getId(),user.getPassword(), ByteSource.Util.bytes(user.getSalt()),   //这里盐先定为id
                     this.getName()) ;

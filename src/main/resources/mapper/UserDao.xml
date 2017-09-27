@@ -6,13 +6,13 @@
             <id column="id" jdbcType="VARCHAR" property="id" />
             <result column="password" jdbcType="VARCHAR" property="password" />
             <result column="role_id" jdbcType="VARCHAR" property="roleId" />
-            <result column="isblock" jdbcType="BIT" property="isBlock" />
+            <result column="block" jdbcType="BIT" property="block" />
 
 
         </resultMap>
 
         <sql id="Base_Column_List">
-            id, password, role_id, isblock
+            id, password, role_id, block
         </sql>
 
         <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -31,7 +31,7 @@
             insert into user (id, password, role_id,
             isblock)
             values (#{id,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
-            #{isblock,jdbcType=BIT})
+            #{block,jdbcType=BIT})
         </insert>
 
         <insert id="insertSelective" parameterType="User">
@@ -46,8 +46,8 @@
                 <if test="roleId != null">
                     role_id,
                 </if>
-                <if test="isblock != null">
-                    isblock,
+                <if test="block != null">
+                    block,
                 </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -60,8 +60,8 @@
                 <if test="roleId != null">
                     #{roleId,jdbcType=VARCHAR},
                 </if>
-                <if test="isblock != null">
-                    #{isblock,jdbcType=BIT},
+                <if test="block != null">
+                    #{block,jdbcType=BIT},
                 </if>
             </trim>
         </insert>
@@ -76,8 +76,8 @@
                 <if test="roleId != null">
                     role_id = #{roleId,jdbcType=VARCHAR},
                 </if>
-                <if test="isblock != null">
-                    isblock = #{isblock,jdbcType=BIT},
+                <if test="block != null">
+                    block = #{block,jdbcType=BIT},
                 </if>
             </set>
             where id = #{id,jdbcType=VARCHAR}
@@ -87,9 +87,13 @@
             update user
             set password = #{password,jdbcType=VARCHAR},
             role_id = #{roleId,jdbcType=VARCHAR},
-            isblock = #{isblock,jdbcType=BIT}
+            block = #{block,jdbcType=BIT}
             where id = #{id,jdbcType=VARCHAR}
         </update>
+
+
+
+
 
 
 </mapper>

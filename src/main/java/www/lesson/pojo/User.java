@@ -11,7 +11,7 @@ public class User {
 
     private String salt;
 
-    private Boolean isBlock = false;
+    private Boolean block = false;
 
 
     public String getSalt() {
@@ -20,11 +20,11 @@ public class User {
     }
 
     public Boolean getBlock() {
-        return isBlock;
+        return block;
     }
 
     public void setBlock(Boolean block) {
-        isBlock = block;
+        block = block;
     }
 
     public String getRoleId() {
