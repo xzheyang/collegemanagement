@@ -54,7 +54,7 @@ public class UserRleam extends AuthorizingRealm {
             throw new UnknownAccountException();//没找到帐号
         }
 
-        if(Boolean.TRUE.equals(user.getBlock())) {
+        if(user.getBlock()) {
             throw new LockedAccountException(); //帐号锁定
         }
 

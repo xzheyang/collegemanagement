@@ -11,12 +11,30 @@ public class Student {
 
     private String birthday;
 
+    private String identification;
+
     private String classId;
 
     private List<String> lessonId;
 
+    //判断性别(String转boolean)
+    public void setWoman(String s){
+        if(s.equals("true")||s.equals("1")){
+            this.woman=true;
+        }else if(s.equals("false")||s.equals("0")){
+            this.woman=false;
+        }else{
+            this.woman=null;
+        }
+    }
 
+    public String getIdentification() {
+        return identification;
+    }
 
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
 
     public String getId() {
         return id;

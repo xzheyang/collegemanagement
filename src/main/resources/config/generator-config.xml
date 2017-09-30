@@ -51,14 +51,12 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表  设置不需要example -->
-        <table schema="" tableName="role"  domainObjectName="Role"
+        <table schema="" tableName="class"  domainObjectName="Class"
                enableCountByExample="false" enableSelectByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"
         ></table>
-        <table schema="" tableName="permission"  domainObjectName="Permission"
-               enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"
-        ></table>
+
+
 
 
 

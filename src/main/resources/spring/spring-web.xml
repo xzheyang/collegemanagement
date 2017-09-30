@@ -32,6 +32,17 @@
     </bean>
 
 
+    <!-- 处理文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <property name="defaultEncoding" value="gbk"/> <!-- 默认编码 (ISO-8859-1) -->
+        <property name="maxInMemorySize" value="10240"/> <!-- 最大内存大小 (10240)-->
+        <property name="uploadTempDir" value="/upload"/> <!-- 上传后的目录名(临时路径,首先放里面,内存大小满后再传递到实际路径) (WebUtils#TEMP_DIR_CONTEXT_ATTRIBUTE) -->
+        <property name="maxUploadSize" value="#{1024*1024}"/> <!-- 最大文件大小，-1为无限止(-1) -->
+    </bean>
+
+
+
 
     <!--           shiro的web配置                         -->
 

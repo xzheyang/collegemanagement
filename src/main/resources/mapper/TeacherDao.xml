@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.lesson.register.dao.TeacherDao">
+
+
+    <resultMap id="BaseResultMap" type="Teacher">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="userName" />
+        <result column="sex" jdbcType="BIT" property="woman" />
+        <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id, username, sex, birthday, identification
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from teacher
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from teacher
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="Teacher">
+        insert into teacher (id, userName, sex,
+        birthday, identification)
+        values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{woman,jdbcType=BIT},
+        #{birthday,jdbcType=VARCHAR}, #{identification,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="Teacher">
+        insert into teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                username,
+            </if>
+            <if test="woman != null">
+                sex,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="identification != null">
+                identification,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="woman != null">
+                #{woman,jdbcType=BIT},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="identification != null">
+                #{identification,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Teacher">
+        update teacher
+        <set>
+            <if test="userName != null">
+                username = #{userNme,jdbcType=VARCHAR},
+            </if>
+            <if test="woman != null">
+                sex = #{woman,jdbcType=BIT},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="identification != null">
+                identification = #{identification,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="Teacher">
+    update teacher
+    set username = #{userName,jdbcType=VARCHAR},
+      sex = #{woman,jdbcType=BIT},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      identification = #{identification,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

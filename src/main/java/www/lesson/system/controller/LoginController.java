@@ -1,6 +1,8 @@
 package www.lesson.system.controller;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,14 +25,24 @@ public class LoginController {
     public String loginUser(User user, HttpServletRequest request, Model model){
 
         //获取错误信息,并跳转
-        String error = (String) request.getAttribute("shiroLoginFailure");
-        if(error!=null){
-            model.addAttribute("error","密码错误");
-            return "forward:login.jsp";
+        String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
+        if(exceptionClassName!=null){
+
+            if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
+                model.addAttribute("error","passError");
+            } else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
+                model.addAttribute("error","passError");
+            } else if (exceptionClassName != null) {
+                model.addAttribute("error","blocked");
+            }
+
+
+            return "redirect:/login.jsp";
         }
 
+
+
         return "redirect:/error.jsp";
-       // return "redirect:/error.jsp";
     }
 
 

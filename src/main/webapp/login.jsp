@@ -12,6 +12,13 @@
 
     <script type="text/javascript">
 
+        //取出传回来的参数error并判断错误信息
+        var error ='<%=request.getParameter("error")%>';
+        if(error=='passError'){
+            alert("密码或用户名错误");
+        }else if(error=='blocked'){
+            alert("用户被锁定");
+        }
 
     </script>
 </head>

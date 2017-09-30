@@ -1,6 +1,5 @@
 package www.lesson.pojo;
 
-import java.util.List;
 
 public class User {
     private String id;
@@ -13,6 +12,28 @@ public class User {
 
     private Boolean block = false;
 
+    private Student student;
+
+    private Teacher teacher;
+
+
+
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     public String getSalt() {
 
@@ -24,7 +45,7 @@ public class User {
     }
 
     public void setBlock(Boolean block) {
-        block = block;
+        this.block = block;
     }
 
     public String getRoleId() {

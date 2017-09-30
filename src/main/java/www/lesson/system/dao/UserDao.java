@@ -18,4 +18,8 @@ public interface UserDao {
 
     int updateById(User record);
 
+    User selectStudentById(String id);
+
+    User selectTeacherById(String id);
+
 }

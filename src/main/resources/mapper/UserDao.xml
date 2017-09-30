@@ -8,6 +8,19 @@
             <result column="role_id" jdbcType="VARCHAR" property="roleId" />
             <result column="block" jdbcType="BIT" property="block" />
 
+            <association property="student" column="id" javaType="Student">
+                <id column="id" jdbcType="VARCHAR" property="id" />
+                <result column="username" jdbcType="VARCHAR" property="userName" />
+                <result column="sex"  property="woman" />
+                <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+            </association>
+
+            <association property="teacher" column="id" javaType="Teacher">
+                <id column="id" jdbcType="VARCHAR" property="id" />
+                <result column="username" jdbcType="VARCHAR" property="userName" />
+                <result column="sex"  property="woman" />
+                <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+            </association>
 
         </resultMap>
 
@@ -29,7 +42,7 @@
 
         <insert id="insert" parameterType="User">
             insert into user (id, password, role_id,
-            isblock)
+            block)
             values (#{id,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR},
             #{block,jdbcType=BIT})
         </insert>
@@ -92,7 +105,19 @@
         </update>
 
 
+        <select id="selectStudentById" parameterType="java.lang.String" resultMap="BaseResultMap">
+            SELECT
+            *
+            FROM user , student
+            WHERE user.id = #{id,jdbcType=VARCHAR} AND user.id=student.id
+        </select>
 
+        <select id="selectTeacherById" parameterType="java.lang.String" resultMap="BaseResultMap">
+            SELECT
+            *
+            FROM user , teacher
+            WHERE user.id = #{id,jdbcType=VARCHAR} AND user.id=teacher.id
+        </select>
 
 
 
