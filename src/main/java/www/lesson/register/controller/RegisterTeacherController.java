@@ -65,12 +65,19 @@ public class RegisterTeacherController {
 
     }
 
-    @RequestMapping("admin/registeTeacher")
-    public String registerTeacher(Teacher teacher){
+    @RequestMapping("admin/registerTeacher")
+    public String registerTeacher(Teacher teacher , Model model){
 
         boolean result = service.registerTeacher(teacher);
 
-        return null;
+        //返回结果
+        if(result){
+            model.addAttribute("success","注册成功");
+        }else{
+            model.addAttribute("success","注册失败");
+        }
+
+        return "admin/register/register_teacher";
     }
 
 }

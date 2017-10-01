@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -30,8 +31,7 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
     @Resource
     StudentDao studentDao;
 
-    @Resource
-    ClassDao classDao;
+
 
 
     public void registerStudentByExcel(File file) {
@@ -81,6 +81,10 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
 
         }
 
+
+
+        /*方案一: 不支持班级非完整上传,效率稍高
+
             //支持不同班级上传
             String flag = "";
             //班级学生序号(这里暂不支持多次上传一个班级,只能使用额外添加)
@@ -97,10 +101,31 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
                 flag = classIdFlag;
             }
 
-            //学年
-            //Class c = classDao.selectByPrimaryKey(u.getClassId());
             //id自动生成
             u.setId(u.getClassId()+String.format("%02d",x++));
+
+            */
+
+
+            //方案二: 查询数据库获得id, 支持零散上传 , 效率较低
+
+
+            for(int i=0;i<students.size();i++){
+                User user = new User();
+                Student u = students.get(i);
+
+                //获得数据库本班之前Id的值
+                int x ; //学生本班排序
+                List<String> l = studentDao.listPreStudentIds(u.getClassId());
+                if(l.size()>0){
+                    //获得这班级最大Id
+                    String maxId = Collections.max(l);
+                    x = Integer.parseInt(maxId.substring(maxId.length()-2,maxId.length()))+1;
+                }else{  x=1; }
+
+                //id自动生成
+                u.setId(u.getClassId()+String.format("%02d",x));
+
 
             //设置user数据
             user.setId(u.getId());
@@ -144,6 +169,19 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
     public boolean registerStudent(Student student) {
 
         try {
+
+
+            //获得数据库本班之前Id的值
+            int x ; //学生本班排序
+            List<String> l = studentDao.listPreStudentIds(student.getClassId());
+            if(l.size()>0){
+                //获得这班级最大Id
+                String maxId = Collections.max(l);
+                x = Integer.parseInt(maxId.substring(maxId.length()-2,maxId.length()))+1;
+            }else{  x=1; }
+
+            //id自动生成
+            student.setId(student.getClassId()+String.format("%02d",x));
 
 
             User u = new User();

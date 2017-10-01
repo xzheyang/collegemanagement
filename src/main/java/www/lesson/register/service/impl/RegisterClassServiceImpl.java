@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Transactional  //事务同步
@@ -42,8 +43,6 @@ public class RegisterClassServiceImpl implements RegisterClassService {
 
             List<Class> classes = new ArrayList<Class>();
 
-            //默认序号
-            int cid ;
 
             //遍历数据
             for(int i=0;i<l1.size();i++){
@@ -55,10 +54,13 @@ public class RegisterClassServiceImpl implements RegisterClassService {
             if(ExcelFomart.excelYearFomart(myYear))
             {
                 Class c = new Class();
+                //学年班级排位
+                int cid ;
+
+                /*方案1: 如果之前上传的有误,将会出错
 
                 String maxId = classDao.selectMaxId();
                 String year = maxId.substring(0,4);
-
 
 
                 //匹配上一id是否是本学年
@@ -67,8 +69,16 @@ public class RegisterClassServiceImpl implements RegisterClassService {
                     String lastid = maxId.substring(maxId.length()-3,maxId.length());
                     cid = Integer.parseInt(lastid)+1;
                 }else{cid = 1;}
+                */
 
 
+                //方案2: 效率低,较安全
+                List<String> l = classDao.listPreClassIds(myYear);
+                if(l.size()>0){
+                    //获得这学年最大Id
+                    String maxId = Collections.max(l);
+                    cid = Integer.parseInt(maxId.substring(maxId.length()-3,maxId.length()))+1;
+                }else{  cid=1; }
 
 
 
@@ -103,12 +113,28 @@ public class RegisterClassServiceImpl implements RegisterClassService {
 
     }
 
+    public void regClassByExcelNeedId(File file) {
 
+    }
 
 
     public boolean registerClass(Class c) {
 
         try {
+
+            //学年班级排位
+            int cid ;
+            List<String> l = classDao.listPreClassIds(c.getYear());
+            if(l.size()>0){
+                //获得这学年最大Id
+                String maxId = Collections.max(l);
+                cid = Integer.parseInt(maxId.substring(maxId.length()-3,maxId.length()))+1;
+            }else{  cid=1; }
+
+            //自动生成班级id
+            c.setId(c.getYear()+String.format("%03d",cid));
+
+
             classDao.insert(c);
         }catch (Exception e){
             return false;

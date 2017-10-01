@@ -106,9 +106,6 @@ public class RegisterTeacherServiceImpl implements RegisterTeacherService {
 
     }
 
-    public void regTeaByExcelNeedId(File file) {
-
-    }
 
 
 

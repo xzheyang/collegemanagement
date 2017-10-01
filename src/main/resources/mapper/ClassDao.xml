@@ -100,4 +100,16 @@
         SELECT MAX(id) FROM class
     </select>
 
+    <select id="listPreClassIds" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT id FROM class WHERE id LIKE CONCAT('', #{year,jdbcType=VARCHAR}, '%')
+    </select>
+
+    <select id="listClassByYear" resultMap="Class" parameterType="java.lang.String">
+        SELECT * FROM class WHERE year = #{year,jdbcType=VARCHAR} LIMIT #{start} ,#{end}
+    </select>
+
+    <select id="totalClassByYear" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM class WHERE year = #{year,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

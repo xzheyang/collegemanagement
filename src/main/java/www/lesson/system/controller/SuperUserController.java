@@ -136,12 +136,24 @@ public class SuperUserController {
         //解析数据
         String[] idsStr = ids.split(",");
         JSONObject result = new JSONObject();
-        for (int i = 0; i < idsStr.length; i++) {
 
-            //删除id           这里要考虑失败,我觉得可以不要事务性,因为失败一个代表这个id已经被删除,无所谓
-            service.deleteUser(idsStr[i]);
+        try {
+
+            for (int i = 0; i < idsStr.length; i++) {
+                //删除id
+                boolean b = service.deleteUser(idsStr[i]);
+
+            }
+
+            result.put("success", true);
+        }catch (Exception e){
+            //失败一般是由于user有详细信息,或已删除
+            result.put("exist", true);
         }
-        result.put("success", true);
+
+
+
+
         ResponseUtil.write(response, result);
 
 

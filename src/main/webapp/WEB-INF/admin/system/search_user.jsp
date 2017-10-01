@@ -16,6 +16,7 @@
     <script type="text/javascript">
 
         //Bug  点了没有数据的全选,再搜索其它,则不能再点击其他数据
+        //Bug  删除数据,刷新页面还在,是因为缓存?
 
         //要update和saveUser跳转的路径,它们在ToolBar中赋值
         var url;
@@ -55,6 +56,19 @@
                 }
             });
         }
+
+
+
+        /*
+        function clearData() {
+            var item = $('#filegrid').datagrid('getRows');
+            if (item) {
+                for (var i = item.length - 1; i >= 0; i--) {
+                    var index = $('#filegrid').datagrid('getRowIndex', item[i]);
+                    $('#filegrid').datagrid('deleteRow', index);
+                }
+            }
+        }*/
 
 
 
@@ -155,10 +169,14 @@
                                 $.post("${lesson}/admin/deleteUser",
                                     {ids: ids}, function(result){
                                         if(result.exist) {
-                                            $.messager.alert("系统提示", '详细信息也已删除');
+                                            $.messager.alert("系统提示", '用户有学生或老师信息,请去用户管理删除');
                                         } else if(result.success) {
                                             $.messager.alert("系统提示", "数据删除成功！");
                                             $("#dg").datagrid("reload");
+                                            //clearData();      使用方法清除列表,但依然会有TypeError
+                                            $('#dg').datagrid('clearData');
+                                            //$("#dg").datagrid("clearSelections");  两个都是清除选择,但这个问题在于缓存
+                                            //$("#dg").datagrid("clearChecked");
                                         } else {
                                             $.messager.alert("系统提示", "数据删除失败！");
                                         }
@@ -187,10 +205,10 @@
 <!--
             搜索框
 -->
-<input id="ss" class="easyui-searchbox" style="width:300px"
+<input id="ss" class="easyui-searchbox" style="width:260px"
        data-options="searcher:searchUser,prompt:'Please Input Value',menu:'#mm'"></input>
-<div id="mm" style="width:60px;height:80px" >
-    <div data-options="name:'id',iconCls:'icon-ok'">Id</div>
+<div id="mm" style="width:60px;height:80px">
+    <div data-options="name:'id'">Id</div>
     <div data-options="name:'name'">姓名</div>
 </div>
 
@@ -207,7 +225,7 @@
             保存修改弹出框
 -->
 
-<div id="dlg" class="easyui-dialog" style="width:500px; height:180px; padding:10px 20px"
+<div id="dlg" class="easyui-dialog"  style="width:500px; height:250px;top:100px; padding:10px 20px"
      closed="true" buttons="#dlg-buttons">
     <form id="fm" method="post">
         <table cellspacing="8px">

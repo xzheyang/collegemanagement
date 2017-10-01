@@ -67,7 +67,7 @@
 <div data-options="region:'west'" style="width: 200px" title="导航菜单">
 
     <div class="easyui-accordion" data-options="fit:true,border:false">
-        <div title="用户操作" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
+        <div title="快键管理" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
 
             <a href="javascript:openTab('搜索用户','admin/system/search_user')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-search'" style="width: 150px">搜索用户</a>
@@ -78,18 +78,24 @@
 
         </div>
 
-        <div title="注册" data-options="iconCls:''" style="padding:10px;">
+        <div title="注册" data-options="iconCls:'icon-'" style="padding:10px;">
 
-            <a href="javascript:openTab('Excel上传学生','admin/register/register_student_excel')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">Excel上传学生</a>
+            <a href="javascript:openTab('Excel注册学生','admin/register/register_student_excel')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">Excel注册学生</a>
+            <a href="javascript:openTab('Excel注册班级','admin/register/register_class_excel')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">Excel注册班级</a>
+            <a href="javascript:openTab('Excel注册教师','admin/register/register_teacher_excel')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-min_edit'" style="width: 150px;">Excel注册教师</a>
 
-            <a href="javascript:openTab('Excel上传班级','admin/register/register_class_excel')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">Excel上传班级</a>
-            <a href="javascript:openTab('Excel上传教师','admin/register/register_teacher_excel')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-min_edit'" style="width: 150px;">Excel上传教师</a>
+            <a href="javascript:openTab('注册学生','admin/register/register_student')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">注册学生</a>
+            <a href="javascript:openTab('注册班级','admin/register/register_class')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">注册班级</a>
+            <a href="javascript:openTab('注册教师','admin/register/register_teacher')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-min_edit'" style="width: 150px;">注册教师</a>
         </div>
 
-        <div title="老师操作" data-options="iconCls:'icon-'" style="padding:10px;">
+        <div title="用户管理" data-options="iconCls:'icon-'" style="padding:10px;">
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
             <a href="#" class="easyui-linkbutton"
@@ -97,6 +103,14 @@
         </div>
 
         <div title="公选课操作" data-options="iconCls:'icon-'" style="padding:10px;">
+            <a href="#" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
+            <a href="#" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量修改分数</a>
+        </div>
+
+
+        <div title="课程与分数管理" data-options="iconCls:'icon-'" style="padding:10px;">
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
             <a href="#" class="easyui-linkbutton"

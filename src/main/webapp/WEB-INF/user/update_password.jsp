@@ -53,30 +53,30 @@
 
 
 <form id="updatePasswordBox" name="修改密码" >
-<table cellpadding=3>
+<table cellpadding=3 align="center" >
 
     <tr>
         <td>旧密码：</td>
         <td><input id="oldPassword" type="Password" class="easyui-validatebox"
-                   required="true" data-options="validType:'length[1,11]'" />
+                   required="true" data-options="validType:'length[1,16]'" />
         </td>
     </tr>
 
     <tr>
         <td>新密码：</td>
         <td><input id="newPassword" type="Password" class="easyui-validatebox"
-                   required="true" data-options="validType:'length[1,11]'" />
+                   required="true" data-options="validType:'length[1,16]'" />
         </td>
     </tr>
     <tr>
         <td>确认密码：</td>
         <td><input id="rePassword" type="Password" class="easyui-validatebox"
-                   required="true" data-options="validType:'length[1,11]'"/>
+                   required="true" data-options="validType:'length[1,16]'"/>
         </td>
     </tr>
 </table>
 </div>
-<div  border="false" style="text-align: right; height: 30px; line-height: 30px;">
+<div  border="false" style="text-align: center; height: 30px; line-height: 30px;">
     <a id="enter" class="easyui-linkbutton" icon="icon-ok" href="javascript:update()" >确定</a>
     <a id="cancel" class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)">取消</a>
 </div>

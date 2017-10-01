@@ -11,14 +11,11 @@
     <script type="text/javascript">
         //取出传回来的参数并判断信息
         var success ='${success}';
-        var error ='${error}';
 
         if(success!=''){
             alert(success);
         }
-        if(error!=''){
-            alert(error);
-        }
+
     </script>
 </head>
 <body>

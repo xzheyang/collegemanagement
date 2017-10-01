@@ -61,11 +61,18 @@ public class RegisterClassController {
     }
 
     @RequestMapping("admin/registerClass")
-    public String registerClass(Class c){
+    public String registerClass(Class c , Model model){
 
         boolean result = service.registerClass(c);
 
-        return null;
+        //返回结果
+        if(result){
+            model.addAttribute("success","注册成功");
+        }else{
+            model.addAttribute("success","注册失败");
+        }
+
+        return "admin/register/register_class";
     }
 
 }

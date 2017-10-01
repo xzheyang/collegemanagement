@@ -1,6 +1,7 @@
 package www.lesson.system.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import www.lesson.pojo.User;
 import www.lesson.shiro.utils.MD5Util;
 import www.lesson.system.dao.UserDao;
@@ -8,6 +9,7 @@ import www.lesson.system.service.SuperUserService;
 
 import javax.annotation.Resource;
 
+@Transactional
 @Service
 public class SuperUserServiceImpl implements SuperUserService{
 
@@ -107,16 +109,12 @@ public class SuperUserServiceImpl implements SuperUserService{
     }
 
     public boolean deleteUser(String id) {
-        try {
+
 
             userDao.deleteById(id);
 
-        }catch (Exception e){
 
-            return false;
-        }
-
-        return false;
+        return true;
     }
 
 

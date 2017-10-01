@@ -13,7 +13,7 @@ public class Page<T> {
     private int end;
     private List<T> result; //分页查询的结果
 
-    Page(){
+    public Page(){
 
     }
 

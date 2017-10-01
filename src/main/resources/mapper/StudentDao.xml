@@ -116,4 +116,14 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
+    <select id="listPreStudentIds" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT id FROM student WHERE id LIKE CONCAT('', #{classId,jdbcType=VARCHAR}, '%')
+    </select>
+
+    <select id="totalStudentByClass" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(1) FROM student WHERE classId = #{classId,jdbcType=VARCHAR}
+    </select>
+
+
+
 </mapper>

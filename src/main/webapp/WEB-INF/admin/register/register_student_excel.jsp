@@ -26,8 +26,6 @@
 <body>
 
 <h2 style="color: red">
-    支持一次上传多个班级完整学生(可以处理,但是我的做法性能非常差)
-    注意:必须上传一个完整班级学生,否则其它学生用手动添加或撤回再添加<br>
     格式(第一行写属性): 姓名,性别(女为1,男为0),生日(格式为1995/10/6),身份证号(18位),班级号 </h2>
 <form enctype="multipart/form-data" action="${lesson}/admin/registerStudentExcel" method="post">
     <input type="file" name="file">
