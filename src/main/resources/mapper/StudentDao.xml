@@ -121,9 +121,12 @@
     </select>
 
     <select id="totalStudentByClass" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT COUNT(1) FROM student WHERE classId = #{classId,jdbcType=VARCHAR}
+        SELECT COUNT(0) FROM student WHERE class_id = #{classId,jdbcType=VARCHAR}
     </select>
 
+    <select id="listStudentsByClass" resultMap="BaseResultMap" >
+        SELECT * FROM student WHERE class_id = #{classId,jdbcType=VARCHAR} limit #{start},#{end}
+    </select>
 
 
 </mapper>

@@ -3,7 +3,6 @@ package www.lesson.register.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import www.lesson.pojo.Class;
-
 import java.util.List;
 
 @Repository
@@ -32,5 +31,12 @@ public interface ClassDao {
 
     //查询学年的所有班级,分页
     List<Class> listClassByYear(@Param("year") String year,
-                                @Param("start") String start, @Param("end") String end);
+                                @Param("start") int start, @Param("end") int end);
+
+    //查询所有年级
+    List<String> listYears();
+
+    //查询所有班级
+    List<Class> listClass();
+
 }

@@ -100,4 +100,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+
+    <select id="totalTeachers" resultType="java.lang.Integer" >
+        SELECT COUNT(0) FROM teacher
+    </select>
+
+    <select id="listTeachers" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List" /> FROM teacher limit #{start},#{end}
+    </select>
+
+
 </mapper>

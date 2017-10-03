@@ -74,8 +74,6 @@ public class SuperUserController {
             JSONArray array = JSONArray.parseArray(jsonArray);
 
 
-
-
             //添加数据
             result.put("rows", array);
             result.put("total", 1);
@@ -94,9 +92,9 @@ public class SuperUserController {
     @RequestMapping("/admin/updateUser")
     public String updateUser(User user,String oldId, HttpServletResponse response)throws Exception{
 
-        if(oldId.equals(user.getId())){
+        if(!oldId.equals(user.getId())){
             System.out.println("需要修改id");
-            //以后实现
+            //TODO 以后添加更改Id服务
         }
 
         boolean success = service.update(user);
@@ -130,7 +128,7 @@ public class SuperUserController {
 
     @RequiresRoles("admin")
     @RequestMapping("/admin/deleteUser")
-    public String deleteUser(@RequestParam(value = "ids", required = false) String ids,
+    public void deleteUser(@RequestParam(value = "ids", required = false) String ids,
                              HttpServletResponse response) throws Exception {
 
         //解析数据
@@ -152,12 +150,8 @@ public class SuperUserController {
         }
 
 
-
-
         ResponseUtil.write(response, result);
 
-
-        return null;
     }
 
 

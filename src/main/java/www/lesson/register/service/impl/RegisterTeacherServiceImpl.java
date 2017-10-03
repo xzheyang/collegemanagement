@@ -129,4 +129,30 @@ public class RegisterTeacherServiceImpl implements RegisterTeacherService {
         return true;
     }
 
+    public boolean updateTeacher(Teacher teacher) {
+
+        try {
+
+        teacherDao.updateByPrimaryKey(teacher);
+
+        }catch (Exception e){
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean deleteTeacher(String id) {
+
+        try{
+            teacherDao.deleteByPrimaryKey(id);
+            service.deleteUser(id);
+        }catch( Exception e ){
+            throw new RuntimeException("教师下有班级,课程不能删除");
+        }
+
+
+        return true;
+    }
+
 }

@@ -96,21 +96,23 @@
         </div>
 
         <div title="用户管理" data-options="iconCls:'icon-'" style="padding:10px;">
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量修改分数</a>
+            <a href="javascript:openTab('班级管理','admin/details/class_details')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">班级管理</a>
+            <a href="javascript:openTab('教师管理','admin/details/teacher_details')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">教师管理</a>
+            <a href="javascript:openTab('学生管理','admin/details/student_details')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">学生管理</a>
         </div>
-
-        <div title="公选课操作" data-options="iconCls:'icon-'" style="padding:10px;">
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量修改分数</a>
-        </div>
-
 
         <div title="课程与分数管理" data-options="iconCls:'icon-'" style="padding:10px;">
+            <a href="#" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
+            <a href="#" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量修改分数</a>
+        </div>
+
+
+        <div title="公选课操作" data-options="iconCls:'icon-'" style="padding:10px;">
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
             <a href="#" class="easyui-linkbutton"
@@ -125,7 +127,7 @@
                data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
             <a href="#')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-reload'" style="width: 150px;">刷新系统缓存</a>
-            <a href="${path}/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'"
+            <a href="${lesson}/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'"
                style="width: 150px;">安全退出</a>
         </div>
     </div>

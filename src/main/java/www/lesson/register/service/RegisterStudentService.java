@@ -16,4 +16,14 @@ public interface RegisterStudentService {
     //单独注册学生
     boolean registerStudent(Student student);
 
+    //意外删除,要将User也删除
+    boolean deleteStudent(String id);
+
+    //意外修改学生
+    boolean updateStudent(Student student);
+
+
+
+
+
 }

@@ -15,4 +15,10 @@ public interface RegisterClassService {
     //单独注册班级
     boolean registerClass(Class c);
 
+    //意外删除
+    boolean deleteClass(String id);
+
+    //意外修改
+    boolean updateClass(Class c);
+
 }

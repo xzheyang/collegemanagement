@@ -143,5 +143,22 @@ public class RegisterClassServiceImpl implements RegisterClassService {
         return true;
     }
 
+    public boolean deleteClass(String id) {
+
+        classDao.deleteByPrimaryKey(id);
+
+        return true;
+    }
+
+    public boolean updateClass(Class c) {
+
+        try {
+            classDao.updateByPrimaryKey(c);
+        }catch (Exception e){
+            return  false;
+        }
+        return true;
+    }
+
 
 }

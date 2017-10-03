@@ -4,10 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import www.lesson.common.utils.ExcelFomart;
 import www.lesson.common.utils.ExcelUtils;
-import www.lesson.pojo.Class;
 import www.lesson.pojo.Student;
 import www.lesson.pojo.User;
-import www.lesson.register.dao.ClassDao;
 import www.lesson.register.dao.StudentDao;
 import www.lesson.register.service.RegisterStudentService;
 import www.lesson.system.service.SuperUserService;
@@ -198,6 +196,27 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
         return true;
     }
 
+    public boolean deleteStudent(String id) {
+
+
+        //先删除学生信息
+        studentDao.deleteByPrimaryKey(id);
+        //再删除user
+        service.deleteUser(id);
+
+        return true;
+    }
+
+    public boolean updateStudent(Student student) {
+
+        try {
+            studentDao.updateByPrimaryKey(student);
+        }catch (Exception e){
+        return  false;
+    }
+
+        return true;
+    }
 
 
 }

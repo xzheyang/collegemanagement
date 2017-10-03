@@ -104,12 +104,21 @@
         SELECT id FROM class WHERE id LIKE CONCAT('', #{year,jdbcType=VARCHAR}, '%')
     </select>
 
-    <select id="listClassByYear" resultMap="Class" parameterType="java.lang.String">
-        SELECT * FROM class WHERE year = #{year,jdbcType=VARCHAR} LIMIT #{start} ,#{end}
+    <select id="listClassByYear" resultMap="BaseResultMap" >
+        SELECT * FROM class WHERE year = #{year,jdbcType=VARCHAR} limit #{start},#{end}
     </select>
 
     <select id="totalClassByYear" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT COUNT(1) FROM class WHERE year = #{year,jdbcType=VARCHAR}
+        SELECT COUNT(0) FROM class WHERE year = #{year,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="listYears" resultType="java.lang.String" >
+        SELECT year FROM class
+    </select>
+
+    <select id="listClass" resultMap="BaseResultMap" >
+        SELECT <include refid="Base_Column_List" /> FROM class
     </select>
 
 </mapper>
