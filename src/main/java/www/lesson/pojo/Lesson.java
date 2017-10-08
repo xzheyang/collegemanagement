@@ -14,7 +14,7 @@ public class Lesson {
 
     private String teacherId;
 
-    private String classId;
+    private List<Class> classList;
 
 
 
@@ -26,12 +26,12 @@ public class Lesson {
         this.session = session;
     }
 
-    public String getClassId() {
-        return classId;
+    public List<Class> getClassList() {
+        return classList;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setClassList(List<Class> classList) {
+        this.classList = classList;
     }
 
     public String getId() {

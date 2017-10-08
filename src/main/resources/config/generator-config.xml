@@ -51,7 +51,7 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表  设置不需要example -->
-        <table schema="" tableName="class"  domainObjectName="Class"
+        <table schema="" tableName="lesson"  domainObjectName="Lesson"
                enableCountByExample="false" enableSelectByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"
         ></table>

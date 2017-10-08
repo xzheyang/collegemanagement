@@ -62,6 +62,36 @@ public class ExcelFomart {
     }
 
 
+    //全中文字符检测
+    public static boolean excelChineseCharactersFoamrt(String Characters){
+        String regexChineseCharacters="[\\u4e00-\\u9fa5]+";
+
+        if(Characters.matches(regexChineseCharacters))
+        {
+            return true;
+        }
+
+
+        return false;
+    }
+
+    public static boolean excelLessonFomart(String name,String session){
+
+        //学期格式只能为20xx/03/1,或19xx/09/1
+        String regexSession="^(19|20)\\d{2}/(0?3|0?9)/(0?1)$";
+
+
+        if(excelChineseCharactersFoamrt(name)&&session.matches(regexSession)){
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
+
 
 
 

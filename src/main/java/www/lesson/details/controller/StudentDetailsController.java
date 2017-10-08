@@ -28,7 +28,7 @@ public class StudentDetailsController {
     StudentDetailsService service;
 
     @RequestMapping("/details/listStudentByClass")
-    public void listClassByYear(@RequestParam(value = "page", required = false) String page,  //当前多少页
+    public void listStudentByYear(@RequestParam(value = "page", required = false) String page,  //当前多少页
                                   @RequestParam(value = "rows", required = false) String rows,  //有几行
                                   String byClass , HttpServletResponse response) throws Exception {
 
@@ -58,7 +58,7 @@ public class StudentDetailsController {
 
 
     @RequestMapping("/details/searchStudentById")
-    public void searchStudentById(@RequestParam(value = "page", required = false) String page,  //当前多少页
+    public void searchStudentByClass(@RequestParam(value = "page", required = false) String page,  //当前多少页
                                   @RequestParam(value = "rows", required = false) String rows,  //有几行
                                   String  searchType,String  searchValue,HttpServletResponse response) throws Exception {
 

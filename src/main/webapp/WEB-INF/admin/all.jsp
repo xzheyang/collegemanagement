@@ -105,6 +105,10 @@
         </div>
 
         <div title="课程与分数管理" data-options="iconCls:'icon-'" style="padding:10px;">
+            <a href="javascript:openTab('Excel添加课程','admin/lesson/insert_lesson_excel')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">Excel添加课程</a>
+            <a href="javascript:openTab('课程管理','admin/details/lesson_details')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">课程管理</a>
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
             <a href="#" class="easyui-linkbutton"
