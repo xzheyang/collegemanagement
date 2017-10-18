@@ -4,6 +4,8 @@ package www.lesson.details.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,8 @@ import www.lesson.pojo.Page;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class LessonDetailsController {
@@ -46,6 +50,24 @@ public class LessonDetailsController {
         result.put("total", pageBean.getTotal());
         //自定义写入数据
         ResponseUtil.write(response, result);
+
+    }
+
+
+    @RequiresRoles("teacher")
+    @RequestMapping("/details/listLessonByTeacher")
+    public void listClass(HttpServletResponse response, HttpSession session) throws Exception {
+
+        String teacherId = String.valueOf(session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY));
+
+        List<Lesson> lessons = service.listLessonsByTeacher(teacherId);
+
+
+        String jsonArray = JSON.toJSONString(lessons);
+        JSONArray array = JSONArray.parseArray(jsonArray);
+
+        //自定义写入数据
+        ResponseUtil.write(response, array);
 
     }
 

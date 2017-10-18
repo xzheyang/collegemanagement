@@ -7,7 +7,7 @@ import www.lesson.common.utils.ExcelUtils;
 import www.lesson.pojo.Teacher;
 import www.lesson.pojo.User;
 import www.lesson.register.dao.TeacherDao;
-import www.lesson.register.service.RegisterTeacherService;
+import www.lesson.register.service.RegisterService;
 import www.lesson.system.service.SuperUserService;
 import javax.annotation.Resource;
 import java.io.File;
@@ -19,14 +19,14 @@ import java.util.List;
 
 @Transactional  //事务同步
 @Service
-public class RegisterTeacherServiceImpl implements RegisterTeacherService {
+public class RegisterTeacherServiceImpl implements RegisterService<Teacher> {
 
     @Resource(name = "superUserServiceImpl")
     SuperUserService service;
     @Resource
     TeacherDao teacherDao;
 
-    public void registerTeacherByExcel(File file) {
+    public void registerByExcel(File file) {
 
 
         try {
@@ -109,11 +109,11 @@ public class RegisterTeacherServiceImpl implements RegisterTeacherService {
 
 
 
-    public boolean registerTeacher(Teacher teacher) {
-
+    public boolean register(Teacher teacher) {
 
 
         try {
+
 
             User u = new User();
             u.setRoleId("2");
@@ -129,9 +129,12 @@ public class RegisterTeacherServiceImpl implements RegisterTeacherService {
         return true;
     }
 
-    public boolean updateTeacher(Teacher teacher) {
+    public boolean update(Teacher teacher) {
+
+
 
         try {
+
 
         teacherDao.updateByPrimaryKey(teacher);
 
@@ -142,7 +145,7 @@ public class RegisterTeacherServiceImpl implements RegisterTeacherService {
         return true;
     }
 
-    public boolean deleteTeacher(String id) {
+    public boolean delete(String id) {
 
         try{
             teacherDao.deleteByPrimaryKey(id);

@@ -40,9 +40,9 @@ public class LoginController {
             return "redirect:/login.jsp";
         }
 
-
-
-        return "redirect:/error.jsp";
+        //重复登录
+        model.addAttribute("error","reLogin");
+        return "redirect:/re_login.jsp";
     }
 
 

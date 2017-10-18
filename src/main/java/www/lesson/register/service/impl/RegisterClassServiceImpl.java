@@ -6,7 +6,7 @@ import www.lesson.common.utils.ExcelFomart;
 import www.lesson.common.utils.ExcelUtils;
 import www.lesson.pojo.Class;
 import www.lesson.register.dao.ClassDao;
-import www.lesson.register.service.RegisterClassService;
+import www.lesson.register.service.RegisterService;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,13 +18,13 @@ import java.util.List;
 
 @Transactional  //事务同步
 @Service
-public class RegisterClassServiceImpl implements RegisterClassService {
+public class RegisterClassServiceImpl implements RegisterService<Class> {
 
     @Resource
     ClassDao classDao;
 
 
-    public void registerClassByExcel(File file) {
+    public void registerByExcel(File file) {
 
         /**
          *          班级id=学年+序号
@@ -92,9 +92,12 @@ public class RegisterClassServiceImpl implements RegisterClassService {
 
 
                 //注册Class
-                if(!classDao.insert(c)){
-                    throw new RuntimeException("第"+String.valueOf(i+2)+"行出现User注册错误");
+                try{
+                    classDao.insert(c);
+                }catch (Exception MySQLIntegrityConstraintViolationException){
+                    throw new RuntimeException("第"+String.valueOf(i+2)+"行教师id错误");
                 }
+
 
             }else{
                 throw new RuntimeException("第"+String.valueOf(i+2)+"行出现格式注册错误");
@@ -113,14 +116,11 @@ public class RegisterClassServiceImpl implements RegisterClassService {
 
     }
 
-    public void regClassByExcelNeedId(File file) {
 
-    }
-
-
-    public boolean registerClass(Class c) {
+    public boolean register(Class c) {
 
         try {
+
 
             //学年班级排位
             int cid ;
@@ -143,16 +143,17 @@ public class RegisterClassServiceImpl implements RegisterClassService {
         return true;
     }
 
-    public boolean deleteClass(String id) {
+    public boolean delete(String id) {
 
         classDao.deleteByPrimaryKey(id);
 
         return true;
     }
 
-    public boolean updateClass(Class c) {
+    public boolean update(Class c) {
 
         try {
+
             classDao.updateByPrimaryKey(c);
         }catch (Exception e){
             return  false;

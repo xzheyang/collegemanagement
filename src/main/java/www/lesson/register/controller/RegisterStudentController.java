@@ -11,7 +11,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import www.lesson.common.utils.FileUtils;
 import www.lesson.common.utils.ResponseUtil;
 import www.lesson.pojo.Student;
-import www.lesson.register.service.RegisterStudentService;
+import www.lesson.register.service.RegisterService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import java.io.IOException;
 @Controller
 public class RegisterStudentController {
     @Resource(name = "registerStudentServiceImpl")
-    RegisterStudentService service;
+    RegisterService service;
 
     @RequestMapping("admin/registerStudentExcel")
     public String registerStudentByExcel(
@@ -41,7 +42,7 @@ public class RegisterStudentController {
 
         //注册
         try {
-            service.registerStudentByExcel(up);
+            service.registerByExcel(up);
         }catch (Exception e){
             errorMessage = e.getMessage();
             errorClassName = e.getClass().getName();
@@ -65,7 +66,7 @@ public class RegisterStudentController {
     @RequestMapping("admin/registerStudent")
     public String registerStudent(Student student , Model model){
 
-        boolean result = service.registerStudent(student);
+        boolean result = service.register(student);
 
         //返回结果
         if(result){
@@ -82,8 +83,8 @@ public class RegisterStudentController {
     @RequestMapping("admin/insertStudent")
     public void insertStudent(Student student , HttpServletResponse response) throws Exception {
 
-        //TODO 这里的数据是自动生成Id的,要么前端后端设置为空就自动生成,要么前端改为不能设置Id
-        boolean success = service.registerStudent(student);
+
+        boolean success = service.register(student);
 
         //返回信息
         JSONObject result = new JSONObject();
@@ -104,7 +105,7 @@ public class RegisterStudentController {
 
             for (int i = 0; i < idsStr.length; i++) {
                 //删除id
-                service.deleteStudent(idsStr[i]);
+                service.delete(idsStr[i]);
 
             }
 
@@ -129,7 +130,7 @@ public class RegisterStudentController {
         }
 
 
-        boolean success = service.updateStudent(student);
+        boolean success = service.update(student);
 
         //返回信息
         JSONObject result = new JSONObject();

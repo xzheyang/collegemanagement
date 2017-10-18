@@ -7,7 +7,7 @@ import www.lesson.common.utils.ExcelUtils;
 import www.lesson.pojo.Student;
 import www.lesson.pojo.User;
 import www.lesson.register.dao.StudentDao;
-import www.lesson.register.service.RegisterStudentService;
+import www.lesson.register.service.RegisterService;
 import www.lesson.system.service.SuperUserService;
 import javax.annotation.Resource;
 import java.io.File;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @Transactional  //事务同步              要抛出异常才会事务失败
 @Service
-public class RegisterStudentServiceImpl implements RegisterStudentService {
+public class RegisterStudentServiceImpl implements RegisterService<Student> {
 
     @Resource(name = "superUserServiceImpl")
     SuperUserService service;
@@ -32,7 +32,7 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
 
 
 
-    public void registerStudentByExcel(File file) {
+    public void registerByExcel(File file) {
 
             /**
              *          先注册User(id=班级id+班级排位,默认密码是身份证号),再注册Student
@@ -139,9 +139,11 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
 
 
             //注册student
-            if(!studentDao.insert(u)) {
-                throw new RuntimeException("第"+String.valueOf(i+2)+"行出现Student注册错误");      //返回错误行
-            }
+                try{
+                        studentDao.insert(u);
+                }catch (Exception MySQLIntegrityConstraintViolationException){
+                    throw new RuntimeException("第"+String.valueOf(i+2)+"行班级id错误");
+                }
 
 
 
@@ -158,13 +160,10 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
 
     }
 
-    public void regStuByExcelNeedId(File file) {
-
-    }
 
 
 
-    public boolean registerStudent(Student student) {
+    public boolean register(Student student) {
 
         try {
 
@@ -196,7 +195,7 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
         return true;
     }
 
-    public boolean deleteStudent(String id) {
+    public boolean delete(String id) {
 
 
         //先删除学生信息
@@ -207,9 +206,11 @@ public class RegisterStudentServiceImpl implements RegisterStudentService {
         return true;
     }
 
-    public boolean updateStudent(Student student) {
+    public boolean update(Student student) {
 
         try {
+
+
             studentDao.updateByPrimaryKey(student);
         }catch (Exception e){
         return  false;

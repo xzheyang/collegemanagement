@@ -34,4 +34,7 @@ public interface LessonDao {
     //查询此班级课程的总数
     int totalLessonByClass(String classId);
 
+    //按教师Id获得班级
+    List<Lesson> listLessonByTeacherId(String teacherId);
+
 }

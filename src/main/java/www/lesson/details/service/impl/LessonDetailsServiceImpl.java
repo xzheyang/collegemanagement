@@ -7,6 +7,7 @@ import www.lesson.pojo.Lesson;
 import www.lesson.pojo.Page;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Service
@@ -20,6 +21,11 @@ public class LessonDetailsServiceImpl implements LessonDetailsService {
         page.setTotal(lessonDao.totalLessonByClass(classId));
         page.setResult(lessonDao.listLessonsByClass(classId,page.getStart(),page.getEnd()));
 
+    }
+
+    public List<Lesson> listLessonsByTeacher(String teacherId) {
+
+        return lessonDao.listLessonByTeacherId(teacherId);
     }
 
 

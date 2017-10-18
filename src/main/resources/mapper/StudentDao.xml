@@ -125,7 +125,7 @@
     </select>
 
     <select id="listStudentsByClass" resultMap="BaseResultMap" >
-        SELECT * FROM student WHERE class_id = #{classId,jdbcType=VARCHAR} limit #{start},#{end}
+        SELECT <include refid="Base_Column_List" /> FROM student WHERE class_id = #{classId,jdbcType=VARCHAR} limit #{start},#{end}
     </select>
 
 

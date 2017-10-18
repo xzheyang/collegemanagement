@@ -69,10 +69,10 @@
     <div class="easyui-accordion" data-options="fit:true,border:false" >
         <div title="分数查询" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
 
-            <a href="javascript:openTab('搜索用户','admin/system/search_user')" class="easyui-linkbutton"
+            <a href="javascript:openTab('全部成绩查询','student/score/list_score')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-search'" style="width: 150px">全部成绩查询</a>
 
-            <a href="javascript:openTab('补考成绩查询','admin/system/search_user')" class="easyui-linkbutton"
+            <a href="javascript:openTab('补考成绩查询','')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-search'" style="width: 150px">补考成绩查询</a>
 
         </div>
@@ -82,16 +82,12 @@
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">课程表</a>
 
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-min_edit'" style="width: 150px;">批量修改分数</a>
 
         </div>
 
         <div title="个人信息" data-options="iconCls:'icon-'" style="padding:10px;">
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">个人信息</a>
-            <a href="#" class="easyui-linkbutton"
-                 data-options="plain:true,iconCls:'icon-'" style="width: 150px;"></a>
         </div>
 
         <div title="公选课" data-options="iconCls:'icon-'" style="padding:10px;">
@@ -103,8 +99,6 @@
 
 
         <div title="系统管理" data-options="iconCls:'icon-'" style="padding:10px">
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
             <a href="javascript:openTab('修改密码','user/update_password')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
             <a href="#" class="easyui-linkbutton"

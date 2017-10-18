@@ -137,4 +137,11 @@
         limit #{start},#{end}
     </select>
 
+    <select id="listLessonByTeacherId" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        from lesson
+        where teacher_id = #{teacherId,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

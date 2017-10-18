@@ -4,6 +4,7 @@ import base.BaseTest;
 import org.apache.poi.ss.formula.functions.T;
 import org.junit.Test;
 import www.lesson.lesson.dao.LessonDao;
+import www.lesson.lesson.dao.ScoreDao;
 import www.lesson.pojo.*;
 import www.lesson.pojo.Class;
 import www.lesson.register.dao.ClassDao;
@@ -35,20 +36,14 @@ public class DetailsDaoTest extends BaseTest {
     @Resource
     LessonDao lessonDao;
 
+    @Resource
+    ScoreDao scoreDao;
+
     @Test
     public void testDetails() {
 
-        Lesson l = new Lesson();
 
-        l.setName("2");
-        l.setSession("3");
-        l.setTeacherId("7");
-
-
-
-        System.out.println("测试dao1:"+lessonDao.totalLessonByClass("2014003"));
-        //System.out.println("pojo_id:"+l.getId()+"  pojo_s:"+l.getSession());
-        System.out.println("测试dao2:"+lessonDao.listLessonsByClass("2014003",0,3).get(2).getSession());
+        System.out.println("测试"+scoreDao.selectByLessonId(1,0,8).get(0).getScore());
 
     }
 

@@ -199,7 +199,7 @@
                 columns:[[
                     {field:'roleId',title:'权限[管理员(1),教师(2),学生(3)]',width:300},   //其他数据 字段
                     {field:'block',title:'锁定',width:300},
-                ]],
+                ]]
             });
         }
 

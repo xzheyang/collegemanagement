@@ -11,7 +11,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import www.lesson.common.utils.FileUtils;
 import www.lesson.common.utils.ResponseUtil;
 import www.lesson.pojo.Teacher;
-import www.lesson.register.service.RegisterTeacherService;
+import www.lesson.register.service.RegisterService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ import java.io.IOException;
 public class RegisterTeacherController {
 
     @Resource(name = "registerTeacherServiceImpl")
-    RegisterTeacherService service;
+    RegisterService service;
 
     @RequestMapping("admin/registerTeacherExcel")
     public String registerTeacherByExcel(
@@ -43,7 +44,7 @@ public class RegisterTeacherController {
 
         //注册
         try {
-            service.registerTeacherByExcel(up);
+            service.registerByExcel(up);
         }catch (Exception e){
             errorMessage = e.getMessage();
             errorClassName = e.getClass().getName();
@@ -71,7 +72,7 @@ public class RegisterTeacherController {
     @RequestMapping("admin/registerTeacher")
     public String registerTeacher(Teacher teacher , Model model){
 
-        boolean result = service.registerTeacher(teacher);
+        boolean result = service.register(teacher);
 
         //返回结果
         if(result){
@@ -87,7 +88,7 @@ public class RegisterTeacherController {
     @RequestMapping("admin/insertTeacher")
     public void insertTeacher(Teacher teacher , HttpServletResponse response) throws Exception {
 
-        boolean success = service.registerTeacher(teacher);
+        boolean success = service.register(teacher);
 
         //返回信息
         JSONObject result = new JSONObject();
@@ -108,7 +109,7 @@ public class RegisterTeacherController {
 
             for (int i = 0; i < idsStr.length; i++) {
                 //删除id
-                service.deleteTeacher(idsStr[i]);
+                service.delete(idsStr[i]);
 
             }
 
@@ -132,7 +133,7 @@ public class RegisterTeacherController {
         }
 
 
-        boolean success = service.updateTeacher(teacher);
+        boolean success = service.update(teacher);
 
         //返回信息
         JSONObject result = new JSONObject();

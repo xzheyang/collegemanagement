@@ -105,7 +105,7 @@
     </select>
 
     <select id="listClassByYear" resultMap="BaseResultMap" >
-        SELECT * FROM class WHERE year = #{year,jdbcType=VARCHAR} limit #{start},#{end}
+        SELECT <include refid="Base_Column_List" /> FROM class WHERE year = #{year,jdbcType=VARCHAR} limit #{start},#{end}
     </select>
 
     <select id="totalClassByYear" resultType="java.lang.Integer" parameterType="java.lang.String">

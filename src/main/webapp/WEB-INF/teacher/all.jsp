@@ -69,42 +69,29 @@
     <div class="easyui-accordion" data-options="fit:true,border:false">
         <div title="分数上传" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
 
-            <a href="javascript:openTab('搜索用户','admin/system/search_user')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px">Excel分数上传</a>
-
-
-
+            <a href="javascript:openTab('Excel分数添加','teacher/score/insert_score_excel')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px">Excel分数添加</a>
+            <a href="javascript:openTab('核对分数','teacher/score/validate_score')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px">核对分数</a>
         </div>
 
         <div title="课程" data-options="iconCls:'icon-'" style="padding:10px;">
 
             <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">Excel上传学生</a>
+               data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">你的课程</a>
 
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">xxx</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-min_edit'" style="width: 150px;">批量修改分数</a>
         </div>
 
-        <div title="老师操作" data-options="iconCls:'icon-'" style="padding:10px;">
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量修改分数</a>
-        </div>
 
         <div title="公选课" data-options="iconCls:'icon-'" style="padding:10px;">
             <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">你的公选课</a>
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">你执教的公选课</a>
             <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">你的体育课</a>
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">你执教的体育课</a>
         </div>
 
 
         <div title="系统管理" data-options="iconCls:'icon-'" style="padding:10px">
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
             <a href="javascript:openTab('修改密码','user/update_password')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
             <a href="#')" class="easyui-linkbutton"

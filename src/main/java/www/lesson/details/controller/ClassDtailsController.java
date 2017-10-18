@@ -13,7 +13,6 @@ import www.lesson.pojo.Class;
 import www.lesson.pojo.Page;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

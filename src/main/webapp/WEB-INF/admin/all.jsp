@@ -87,12 +87,6 @@
             <a href="javascript:openTab('Excel注册教师','admin/register/register_teacher_excel')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-min_edit'" style="width: 150px;">Excel注册教师</a>
 
-            <a href="javascript:openTab('注册学生','admin/register/register_student')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">注册学生</a>
-            <a href="javascript:openTab('注册班级','admin/register/register_class')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">注册班级</a>
-            <a href="javascript:openTab('注册教师','admin/register/register_teacher')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-min_edit'" style="width: 150px;">注册教师</a>
         </div>
 
         <div title="用户管理" data-options="iconCls:'icon-'" style="padding:10px;">
@@ -109,18 +103,18 @@
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">Excel添加课程</a>
             <a href="javascript:openTab('课程管理','admin/details/lesson_details')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">课程管理</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量修改分数</a>
+            <a href="javascript:openTab('Excel添加分数','admin/score/insert_score_excel')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">Excel添加分数</a>
+            <a href="javascript:openTab('分数管理','admin/details/score_details')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">分数管理</a>
         </div>
 
 
         <div title="公选课操作" data-options="iconCls:'icon-'" style="padding:10px;">
             <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量上传分数</a>
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">公选课添加</a>
             <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">批量修改分数</a>
+               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">公选课管理</a>
         </div>
 
 

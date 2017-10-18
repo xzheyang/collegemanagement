@@ -31,6 +31,19 @@ public class LoadController {
         return "user/"+path1;
     }
 
+    //学生控制跳转
+    @RequiresRoles("student")
+    @RequestMapping(value="/student/{path1:\\w+}/{path2:\\w+}")
+    public String studentLoad(@PathVariable String path1,@PathVariable String path2){
+        return "student/"+path1+"/"+path2;
+    }
+
+    //教师控制跳转
+    @RequiresRoles("teacher")
+    @RequestMapping(value="/teacher/{path1:\\w+}/{path2:\\w+}")
+    public String teacherLoad(@PathVariable String path1,@PathVariable String path2){
+        return "teacher/"+path1+"/"+path2;
+    }
 
 
 

@@ -26,7 +26,6 @@
 <body>
 
 <h2 style="color: red">
-    注意:上一学年的班级必须注册完,才能注册这一学年的
     格式(第一行写属性):  班级名, 学年 ,教师id </h2>
 <form enctype="multipart/form-data" action="${lesson}/admin/registerClassExcel" method="post">
     <input type="file" name="file">

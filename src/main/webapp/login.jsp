@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>login</title>
-
+    <%@include file="common/easy-ui.jspf" %>
     <script type="text/javascript">
 
         //取出传回来的参数error并判断错误信息
@@ -25,33 +25,31 @@
 
 <body>
 
-登录<br>
 
 
+<div id="loginWindow" class="easyui-window" title="登录" style="width:350px;height:188px;top:100px;padding:5px;"
+     minimizable="false" maximizable="false" resizable="false" collapsible="false">
+    <div class="easyui-layout" fit="true">
+        <div region="center" border="false" style="padding:5px;background:#fff;border:1px solid #ccc;">
+            <form id="loginForm" method="post" action="login">
+                <div style="padding:5px 0;">
+                    帐号:
+                    <input type="text" name="id" style="width:260px;" class="easyui-validatebox" required="true" />
+                </div>
+                <div style="padding:5px 0;">
+                    密码:
+                    <input type="password" name="password" style="width:260px;" class="easyui-validatebox" required="true" />
+                </div>
+                <div style="text-align:center;padding:10px 0;">
+                    <input type="submit" value="登录" class="easyui-linkbutton" style="width: 76px">
+                </div>
+            </form>
+        </div>
 
 
-
-<form action="login" method="post">
-
-        <table>
-            <tr>
-                <td>
-                    id: <input type="text" name="id">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    密码: <input type="password" name="password">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="提交">
-                </td>
-            </tr>
-        </table>
-
-</form>
+    </div>
+</div>
 
 </body>
+
 </html>

@@ -10,8 +10,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import www.lesson.common.utils.FileUtils;
 import www.lesson.common.utils.ResponseUtil;
 import www.lesson.pojo.Class;
-import www.lesson.pojo.User;
-import www.lesson.register.service.RegisterClassService;
+import www.lesson.register.service.RegisterService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ import java.io.IOException;
 public class RegisterClassController {
 
     @Resource(name = "registerClassServiceImpl")
-    RegisterClassService service;
+    RegisterService service;
 
     @RequestMapping("admin/registerClassExcel")
     public String registerClassByExcel(
@@ -43,7 +43,7 @@ public class RegisterClassController {
 
         //注册
         try {
-            service.registerClassByExcel(up);
+            service.registerByExcel(up);
         }catch (Exception e){
             errorMessage = e.getMessage();
             errorClassName = e.getClass().getName();
@@ -55,7 +55,7 @@ public class RegisterClassController {
                 model.addAttribute("error", errorMessage );
             }else {
                 model.addAttribute("error", errorMessage );
-                System.out.println("错误");
+
             }
         }else{
             model.addAttribute("success", "注册成功" );
@@ -67,7 +67,7 @@ public class RegisterClassController {
     @RequestMapping("admin/registerClass")
     public String registerClass(Class c , Model model){
 
-        boolean result = service.registerClass(c);
+        boolean result = service.register(c);
 
         //返回结果
         if(result){
@@ -82,9 +82,8 @@ public class RegisterClassController {
     @RequestMapping("admin/insertClass")
     public void insertClass(Class c , HttpServletResponse response) throws Exception {
 
-        //TODO 这里的数据是自动生成Id的,要么前端后端设置为空就自动生成,要么前端改为不能设置Id
 
-        boolean success = service.registerClass(c);
+        boolean success = service.register(c);
 
         //返回信息
         JSONObject result = new JSONObject();
@@ -105,7 +104,7 @@ public class RegisterClassController {
 
             for (int i = 0; i < idsStr.length; i++) {
                 //删除id
-                 service.deleteClass(idsStr[i]);
+                 service.delete(idsStr[i]);
 
             }
 
@@ -131,7 +130,7 @@ public class RegisterClassController {
 
 
 
-        boolean success = service.updateClass(c);
+        boolean success = service.update(c);
 
 
         //返回信息

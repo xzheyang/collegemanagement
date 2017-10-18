@@ -107,14 +107,14 @@
 
         <select id="selectStudentById" parameterType="java.lang.String" resultMap="BaseResultMap">
             SELECT
-            *
+            <include refid="Base_Column_List" />
             FROM user , student
             WHERE user.id = #{id,jdbcType=VARCHAR} AND user.id=student.id
         </select>
 
         <select id="selectTeacherById" parameterType="java.lang.String" resultMap="BaseResultMap">
             SELECT
-            *
+            <include refid="Base_Column_List" />
             FROM user , teacher
             WHERE user.id = #{id,jdbcType=VARCHAR} AND user.id=teacher.id
         </select>

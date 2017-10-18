@@ -98,7 +98,7 @@
       birthday = #{birthday,jdbcType=VARCHAR},
       identification = #{identification,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+    </update>
 
 
     <select id="totalTeachers" resultType="java.lang.Integer" >

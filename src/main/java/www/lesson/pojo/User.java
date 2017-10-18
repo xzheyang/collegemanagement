@@ -36,7 +36,6 @@ public class User {
     }
 
     public String getSalt() {
-
         return id;
     }
 
