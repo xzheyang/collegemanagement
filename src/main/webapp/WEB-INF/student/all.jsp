@@ -85,24 +85,18 @@
 
         </div>
 
-        <div title="个人信息" data-options="iconCls:'icon-'" style="padding:10px;">
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">个人信息</a>
-        </div>
+
 
         <div title="公选课" data-options="iconCls:'icon-'" style="padding:10px;">
-            <a href="#" class="easyui-linkbutton"
+            <a href="javascript:openTab('公选课报名','student/publiclesson/sign_up')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">公选课报名</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-'" style="width: 150px;">体育选课报名</a>
+
         </div>
 
 
         <div title="系统管理" data-options="iconCls:'icon-'" style="padding:10px">
             <a href="javascript:openTab('修改密码','user/update_password')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-reload'" style="width: 150px;">刷新系统缓存</a>
             <a href="${path}/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'"
                style="width: 150px;">安全退出</a>
         </div>
@@ -133,7 +127,7 @@
 -->
 
 <div data-options="region:'south'" style="height: 25px;padding: 5px" align="center">
-    <div data-options="region:'south'" style="height: 25px;padding: 5px" align="center">
+    <div data-options="region:'south'" style="height: 25px" align="center">
         仿南通大学信息查询系统
     </div>
 </div>

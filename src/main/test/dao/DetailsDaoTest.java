@@ -1,51 +1,80 @@
 package dao;
 
 import base.BaseTest;
-import org.apache.poi.ss.formula.functions.T;
 import org.junit.Test;
-import www.lesson.lesson.dao.LessonDao;
-import www.lesson.lesson.dao.ScoreDao;
-import www.lesson.pojo.*;
-import www.lesson.pojo.Class;
-import www.lesson.register.dao.ClassDao;
-import www.lesson.register.dao.StudentDao;
-import www.lesson.register.dao.TeacherDao;
-import www.lesson.system.dao.UserDao;
+import www.lesson.pojo.PublicLesson;
+import www.lesson.publiclesson.dao.ChoicePublicLessonDao;
+import www.lesson.publiclesson.dao.PublicLessonDao;
 
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
 
 public class DetailsDaoTest extends BaseTest {
 
-    @Resource
-    UserDao userDao;
+    @Resource(name = "redisChoicePublicLessonDao")
+    ChoicePublicLessonDao choiceDao;
 
-    @Resource
-   StudentDao studentDao;
-
-
-    @Resource
-    TeacherDao teacherDao;
-
-    @Resource
-    ClassDao classDao;
-
-    @Resource
-    LessonDao lessonDao;
-
-    @Resource
-    ScoreDao scoreDao;
-
+    @Resource(name = "redisPublicLessonDao")
+    PublicLessonDao publicLessonDao;
     @Test
     public void testDetails() {
 
+        String textLua ="if redis.call( 'HEXISTS', hexPublicStudent , KEYS[2] ) ~=0 then\n"
+                + "return false\n"
+                +  "else\n"
+                +"if = redis.call('SCARD', KEYS[3] ) >= 200\n"
+                +"then \n"
+                +"return false \n"
+                +" else\n"
+                +"redis.call('SADD', KEYS[3], KEYS[2] );\n"
+                +"redis.call('HMSET', hexPublicStudent , KEYS[2], KEYS[3]);\n"
+                +"return successed\n"
+                +"end\n"
+                +"end\n";
 
-        System.out.println("测试"+scoreDao.selectByLessonId(1,0,8).get(0).getScore());
+
+
+        final String studentId = "xx";
+        final String classId= "110";
+
+
+        PublicLesson publicLesson = new PublicLesson();
+
+        //publicLesson.setId("2");
+        publicLesson.setName("ss");
+        publicLessonDao.insertPublicLessonNoId(publicLesson);
+        //publicLessonDao.updatePublicLesson(publicLesson);
+
+        //publicLessonDao.deletePublicLesson("6");
+
+
+
+        //choiceDao.listChoice();
+
+
+
+        /*
+        //choiceDao.addChoice(studentId,classId);
+
+        for(int i=0;i<500;i++) {
+
+                    //choiceDao.addChoice(String.valueOf(i), classId);
+
+
+        }
+        final PublicLessonChoiceRedisDao dao = new PublicLessonChoiceRedisDao();
+
+        new Thread(new Runnable() {
+
+            public void run() {
+                dao.addChoice(String.valueOf(2), classId);
+            }
+        }).start();
+        */
 
     }
+
+
 
 
 }

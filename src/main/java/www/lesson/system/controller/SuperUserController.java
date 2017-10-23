@@ -94,6 +94,10 @@ public class SuperUserController {
     @RequestMapping("/admin/updateUser")
     public String updateUser(User user,String oldId, HttpServletResponse response)throws Exception{
 
+        if(user.getPassword()==null||user.getPassword().equals("")){
+            user.setPassword(null);
+        }
+
         if(!oldId.equals(user.getId())){
             System.out.println("需要修改id");
             //TODO 以后添加更改Id服务

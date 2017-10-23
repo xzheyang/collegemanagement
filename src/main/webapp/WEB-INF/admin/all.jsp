@@ -111,20 +111,18 @@
 
 
         <div title="公选课操作" data-options="iconCls:'icon-'" style="padding:10px;">
-            <a href="#" class="easyui-linkbutton"
+            <a href="javascript:openTab('Excel添加公选课','admin/lesson/insert_publiclesson_excel')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">公选课添加</a>
-            <a href="#" class="easyui-linkbutton"
+            <a href="javascript:openTab('公选课管理','admin/details/publiclesson_details')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-'" style="width: 150px;">公选课管理</a>
         </div>
 
 
         <div title="系统管理" data-options="iconCls:'icon-'" style="padding:10px">
-            <a href="#" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
+
             <a href="javascript:openTab('修改密码','user/update_password')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
-            <a href="#')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-reload'" style="width: 150px;">刷新系统缓存</a>
+
             <a href="${lesson}/logout" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'"
                style="width: 150px;">安全退出</a>
         </div>
@@ -155,7 +153,7 @@
 -->
 
 <div data-options="region:'south'" style="height: 25px;padding: 5px" align="center">
-    <div data-options="region:'south'" style="height: 25px;padding: 5px" align="center">
+    <div data-options="region:'south'" style="height: 25px;" align="center">
         仿南通大学信息查询系统
     </div>
 </div>

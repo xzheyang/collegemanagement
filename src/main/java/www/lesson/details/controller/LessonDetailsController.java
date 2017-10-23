@@ -39,17 +39,7 @@ public class LessonDetailsController {
         service.listLessonsByClass(pageBean,byClass);
 
 
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-
-        //通过fastJson序列化list为jsonArray
-        String jsonArray = JSON.toJSONString(pageBean.getResult());
-        JSONArray array = JSONArray.parseArray(jsonArray);
-        //将序列化结果放入json对象中
-        result.put("rows", array);
-        result.put("total", pageBean.getTotal());
-        //自定义写入数据
-        ResponseUtil.write(response, result);
+        ResponseUtil.pageWrite(response,pageBean);
 
     }
 

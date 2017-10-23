@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-public class ScoreDtailsController {
+public class ScoreDetailsController {
 
     @Resource(name = "scoreDetailsServiceImpl")
     ScoreDetailsService service;
@@ -38,18 +38,7 @@ public class ScoreDtailsController {
 
 
 
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-
-        //通过fastJson序列化list为jsonArray
-        String jsonArray = JSON.toJSONString(pageBean.getResult());
-        JSONArray array = JSONArray.parseArray(jsonArray);
-        //将序列化结果放入json对象中
-        result.put("rows", array);
-        result.put("total", pageBean.getTotal());
-        //自定义写入数据
-        ResponseUtil.write(response, result);
-
+        ResponseUtil.pageWrite(response,pageBean);
 
     }
 
@@ -66,18 +55,7 @@ public class ScoreDtailsController {
         service.listScoreByLessonId(pageBean,byLesson);
 
 
-        //TODO 用的太多,建个Easy UI分页传输
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-
-        //通过fastJson序列化list为jsonArray
-        String jsonArray = JSON.toJSONString(pageBean.getResult());
-        JSONArray array = JSONArray.parseArray(jsonArray);
-        //将序列化结果放入json对象中
-        result.put("rows", array);
-        result.put("total", pageBean.getTotal());
-        //自定义写入数据
-        ResponseUtil.write(response, result);
+        ResponseUtil.pageWrite(response,pageBean);
 
 
     }

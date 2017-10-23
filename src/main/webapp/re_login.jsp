@@ -9,13 +9,17 @@
 <html>
 <head>
     <title>重复登录</title>
+    <%@include file="common/easy-ui.jspf" %>
     <script type="text/javascript">
 
 
         //取出传回来的参数error并判断错误信息
         var error ='<%=request.getParameter("error")%>';
         if(error=='reLogin') {
-            alert("重复登录或未安全退出,请再次登录");
+
+            $(function () {
+                $.messager.alert("操作提示", "重复登录或未安全退出,请再次登录" ,"info");
+            });
         }
         location.href = 'logout';
     </script>

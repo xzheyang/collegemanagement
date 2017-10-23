@@ -12,7 +12,7 @@
     <!--扫描bean -->
     <context:component-scan base-package="www.lesson" />
     <!-- 加载properties -->
-    <context:property-placeholder location="classpath:config/jdbc.properties" />
+    <context:property-placeholder location="classpath:config/jdbc.properties,classpath:config/redis.properties" />
 
     <!-- 数据库连接参数配置 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -54,6 +54,31 @@
         <!-- 给出需要扫描Dao接口包 -->
         <property name="basePackage" value="www" />
     </bean>
+
+
+    <!-- redis 配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean >
+
+
+    <!-- 配置redis共享连接池，业务层主要通过该bean访问redis服务器 -->
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+        <constructor-arg index="0" ref="poolConfig" />
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg index="0" value="${redis.uri.0}" />
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+
 
 
 </beans>

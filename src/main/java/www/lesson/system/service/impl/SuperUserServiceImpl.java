@@ -77,7 +77,7 @@ public class SuperUserServiceImpl implements SuperUserService{
                 user.setPassword(MD5Util.getPassword(user.getPassword(),user.getSalt()));
             }
 
-            userDao.updateById(user);
+            userDao.updateByIdSelective(user);
         }catch (Exception e){
 
             return false;
