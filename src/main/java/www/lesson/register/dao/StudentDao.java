@@ -30,4 +30,9 @@ public interface StudentDao {
     //总共有哪些班级Id
     List<String> listClass();
 
+    //获得学生名
+    String getNameById(String id);
+
+    //获得班级Id
+    String getClassIdById(String id);
 }

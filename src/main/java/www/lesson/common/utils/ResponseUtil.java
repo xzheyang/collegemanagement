@@ -5,8 +5,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import www.lesson.pojo.Page;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class ResponseUtil {
     /**
@@ -37,6 +38,25 @@ public class ResponseUtil {
         result.put("total", page.getTotal());
         //自定义写入数据
         ResponseUtil.write(response, result);
+
+    }
+
+    //下载
+    public static void down(HttpServletResponse response,File file,String fileName) throws IOException {
+
+        //获取输入流
+        InputStream bis = new BufferedInputStream(new FileInputStream(file));
+        //设置文件下载头
+        response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型
+        response.setContentType("multipart/form-data");
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+        int len = 0;
+        while((len = bis.read()) != -1){
+            out.write(len);
+            out.flush();
+        }
+        out.close();
 
     }
 

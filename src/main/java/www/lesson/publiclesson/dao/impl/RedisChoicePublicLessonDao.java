@@ -21,6 +21,8 @@ public class RedisChoicePublicLessonDao implements ChoicePublicLessonDao {
 
     //已选课的学生的redis库hashMap的key
     final static String publicLessonStudent ="publicLessonStudent";
+    //课程前缀
+    final static String preRedisPublicLesson="publicLesson";
 
     private RuntimeSchema<PublicLesson> schema = RuntimeSchema.createFrom(PublicLesson.class);
 
@@ -43,7 +45,7 @@ public class RedisChoicePublicLessonDao implements ChoicePublicLessonDao {
     public void addChoice(String studentId ,String lessonId) {
 
         //自动生成classId
-        String redisClassId = "publicLesson" + lessonId;
+        String redisPublicLesson = preRedisPublicLesson + lessonId;
 
 
         ShardedJedis shardedJedis = getShardedJedis();
@@ -81,12 +83,12 @@ public class RedisChoicePublicLessonDao implements ChoicePublicLessonDao {
 
             //简单考虑多线程
             synchronized (this) {                       //限制人数
-                if (shardedJedis.scard(redisClassId) >= publicLesson.getAmount()) {
+                if (shardedJedis.scard(redisPublicLesson) >= publicLesson.getAmount()) {
                     throw new RuntimeException("公选课已满");
                 }
 
                 //添加到指定课程
-                shardedJedis.sadd(redisClassId, studentId);
+                shardedJedis.sadd(redisPublicLesson, studentId);
 
             }
 
@@ -110,10 +112,10 @@ public class RedisChoicePublicLessonDao implements ChoicePublicLessonDao {
 
         try {
 
-            String redisClassId = "pulicLesson" + lessonId;
+            String redisPublicLesson = preRedisPublicLesson + lessonId;
 
             //先删除公选课SET的数据
-            shardedJedis.srem(redisClassId, studentId);
+            shardedJedis.srem(redisPublicLesson, studentId);
             //再删除已选学生的数据
             shardedJedis.hdel(publicLessonStudent, studentId);
 
@@ -166,6 +168,30 @@ public class RedisChoicePublicLessonDao implements ChoicePublicLessonDao {
         return result;
     }
 
+    public Set<String> listChoiceByLessonId(String lessonId) {
+
+        ShardedJedis shardedJedis = getShardedJedis();
+        Set<String> result;
+
+        if (shardedJedis == null) {
+            throw new RuntimeException("服务器出错");
+        }
+
+
+
+        try {
+
+          result= shardedJedis.smembers(preRedisPublicLesson+lessonId);
+
+        }finally {
+            shardedJedis.disconnect();
+        }
+
+
+
+        return result;
+    }
+
     public String getChoice(String studentId) {
         ShardedJedis shardedJedis = getShardedJedis();
         String lessonId;
@@ -188,7 +214,7 @@ public class RedisChoicePublicLessonDao implements ChoicePublicLessonDao {
 
     public long getChoiceCount(String lessonId){
         ShardedJedis shardedJedis = getShardedJedis();
-        String redisClassId = "publicLesson"+lessonId;
+        String redisPublicLesson = preRedisPublicLesson+lessonId;
         long count;
 
         if (shardedJedis == null) {
@@ -197,8 +223,8 @@ public class RedisChoicePublicLessonDao implements ChoicePublicLessonDao {
 
         try{
 
-           count = shardedJedis.scard(redisClassId);
-            System.out.println("人数,lesson = [" + count+","+redisClassId + "]");
+           count = shardedJedis.scard(redisPublicLesson);
+
         }finally {
             shardedJedis.disconnect();
         }

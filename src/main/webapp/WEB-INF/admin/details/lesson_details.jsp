@@ -83,7 +83,8 @@
                                 data: data,
                                 valueField: 'id',
                                 textField: 'name',
-                                editable:false //不可编辑状态
+                                editable:false, //不可编辑状态
+                                panelHeight:'auto'
                             }
                         );
                     },

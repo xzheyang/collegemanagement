@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequiresRoles("admin")
 public class TeacherDetailsController {
 
     /**
@@ -30,7 +29,7 @@ public class TeacherDetailsController {
     @Resource(name = "teacherDetailsServiceImpl")
     TeacherDetailsService service;
 
-
+    @RequiresRoles("admin")
     @RequestMapping("/details/listTeachers")
     public void teacher(@RequestParam(value = "page", required = false) String page,  //当前多少页
                         @RequestParam(value = "rows", required = false) String rows,  //有几行
@@ -46,6 +45,7 @@ public class TeacherDetailsController {
 
     }
 
+    @RequiresRoles("admin")
     @RequestMapping("/details/searchTeacherById")
     public void searchTeacher(@RequestParam(value = "page", required = false) String page,  //当前多少页
                               @RequestParam(value = "rows", required = false) String rows,  //有几行

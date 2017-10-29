@@ -19,7 +19,6 @@ import java.util.List;
 
 //管理员用的userController
 @Controller
-@RequiresRoles("admin")
 public class SuperUserController {
 
     @Resource(name = "superUserServiceImpl")
@@ -27,6 +26,7 @@ public class SuperUserController {
 
     //搜索用户
 
+    @RequiresRoles("admin")
     @RequestMapping("/admin/searchUser")
     public String searchUser(@RequestParam(value = "page", required = false) String page,  //当前多少页
                              @RequestParam(value = "rows", required = false) String rows,  //有几行
@@ -90,7 +90,7 @@ public class SuperUserController {
 
 
     //修改User
-
+    @RequiresRoles("admin")
     @RequestMapping("/admin/updateUser")
     public String updateUser(User user,String oldId, HttpServletResponse response)throws Exception{
 
@@ -115,7 +115,7 @@ public class SuperUserController {
     }
 
     //添加User
-
+    @RequiresRoles("admin")
     @RequestMapping("/admin/insertUser")
     public String insertUser(User user, HttpServletResponse response)throws Exception{
 
@@ -132,7 +132,7 @@ public class SuperUserController {
         return null;
     }
 
-
+    @RequiresRoles("admin")
     @RequestMapping("/admin/deleteUser")
     public void deleteUser(@RequestParam(value = "ids", required = false) String ids,
                              HttpServletResponse response) throws Exception {

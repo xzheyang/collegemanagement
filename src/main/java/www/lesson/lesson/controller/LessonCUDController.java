@@ -19,12 +19,11 @@ import java.io.File;
 import java.io.IOException;
 
 @Controller
-@RequiresRoles("admin")
 public class LessonCUDController {
     @Resource(name = "lessonCUDServiceImpl")
     LessonCUDService service;
 
-
+    @RequiresRoles("admin")
     @RequestMapping("admin/insertLessonByExcel")
     public String insertLessonByExcel(
             HttpServletRequest request, Model model ,
@@ -64,7 +63,7 @@ public class LessonCUDController {
         return "admin/lesson/insert_lesson_excel";
     }
 
-
+    @RequiresRoles("admin")
     @RequestMapping("admin/insertLesson")
     public void insertLesson(Lesson lesson,String classIds,
                              HttpServletResponse response) throws Exception {
@@ -86,7 +85,7 @@ public class LessonCUDController {
 
     }
 
-
+    @RequiresRoles("admin")
     @RequestMapping("admin/deleteLesson")
     public void deleteLesson(@RequestParam(value = "ids", required = false) String ids,
                              HttpServletResponse response) throws Exception {
@@ -113,7 +112,7 @@ public class LessonCUDController {
 
     }
 
-
+    @RequiresRoles("admin")
     @RequestMapping("admin/updateLesson")
     public void updateLesson(Lesson lesson, String oldId, HttpServletResponse response)throws Exception{
 

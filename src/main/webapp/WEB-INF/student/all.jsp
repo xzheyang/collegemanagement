@@ -23,7 +23,7 @@
             if($("#tabs").tabs('exists',text)){
                 //如果存在 显示
                 $("#tabs").tabs("select",text);
-            }else{
+            } else{
                 //如果不存在 则新建一个
                 $("#tabs").tabs('add',{
                     title:text,

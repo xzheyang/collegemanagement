@@ -20,12 +20,13 @@ import java.io.File;
 import java.io.IOException;
 
 
-@RequiresRoles("admin")
+
 @Controller
 public class RegisterStudentController {
     @Resource(name = "registerStudentServiceImpl")
     RegisterService service;
 
+    @RequiresRoles("admin")
     @RequestMapping("admin/registerStudentExcel")
     public String registerStudentByExcel(
                         HttpServletRequest request, Model model,
@@ -63,6 +64,7 @@ public class RegisterStudentController {
         return "admin/register/register_student_excel";
     }
 
+    @RequiresRoles("admin")
     @RequestMapping("admin/registerStudent")
     public String registerStudent(Student student , Model model){
 
@@ -80,6 +82,7 @@ public class RegisterStudentController {
 
 
     //能处理ajax请求的单独注册
+    @RequiresRoles("admin")
     @RequestMapping("admin/insertStudent")
     public void insertStudent(Student student , HttpServletResponse response) throws Exception {
 
@@ -93,6 +96,8 @@ public class RegisterStudentController {
 
     }
 
+
+    @RequiresRoles("admin")
     @RequestMapping("/admin/deleteStudent")
     public void deleteStudent(@RequestParam(value = "ids", required = false) String ids,
                            HttpServletResponse response) throws Exception {
@@ -121,6 +126,7 @@ public class RegisterStudentController {
     }
 
 
+    @RequiresRoles("admin")
     @RequestMapping("/admin/updateStudent")
     public void updateStudent(Student student, String oldId, HttpServletResponse response)throws Exception{
 

@@ -71,10 +71,10 @@ public class PublicLessonServiceImpl implements PublicLessonService {
             lesson.setTeacherId(String.valueOf(l2.get(2)));
             lesson.setTime(String.valueOf(l2.get(3)));
             lesson.setCredit(Integer.parseInt(String.valueOf(l2.get(4))));
-
+            lesson.setAmount(Long.parseLong(String.valueOf(l2.get(5))));
 
             try {
-                dao.insertPublicLesson(lesson);
+                dao.insertPublicLessonNoId(lesson);
             }catch (Exception e){
                 throw new RuntimeException("第"+String.valueOf(i+2)+"行数据错误");
             }

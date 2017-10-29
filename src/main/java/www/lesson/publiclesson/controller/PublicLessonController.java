@@ -1,6 +1,7 @@
 package www.lesson.publiclesson.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class PublicLessonController {
     @Resource(name = "publicLessonServiceImpl")
     PublicLessonService service;
 
+    @RequiresRoles("admin")
     @RequestMapping("/admin/insertPublicLessonByExcel")
     public String insertPublicLessonByExcel(HttpServletRequest request, Model model ,
                                           @RequestParam("file")CommonsMultipartFile file) throws IOException {
@@ -61,6 +63,7 @@ public class PublicLessonController {
         return "admin/lesson/insert_publiclesson_excel";
     }
 
+    @RequiresRoles("admin")
     @RequestMapping("/admin/insertPublicLesson")
     public void insertPublicLesson( PublicLesson publicLesson,
                                     HttpServletResponse response) throws Exception {
@@ -85,6 +88,7 @@ public class PublicLessonController {
         ResponseUtil.write(response, result);
     }
 
+    @RequiresRoles("admin")
     @RequestMapping("admin/deletePublicLesson")
     public void deletePublicLesson(@RequestParam(value = "ids", required = false) String ids,
                              HttpServletResponse response) throws Exception {
@@ -110,7 +114,7 @@ public class PublicLessonController {
 
     }
 
-
+    @RequiresRoles("admin")
     @RequestMapping("admin/updatePublicLesson")
     public void updateLesson(PublicLesson lesson, String oldId, HttpServletResponse response)throws Exception{
 

@@ -2,11 +2,15 @@ package dao;
 
 import base.BaseTest;
 import org.junit.Test;
+import www.lesson.common.utils.ExcelUtils;
+import www.lesson.pojo.Lesson;
 import www.lesson.pojo.PublicLesson;
 import www.lesson.publiclesson.dao.ChoicePublicLessonDao;
 import www.lesson.publiclesson.dao.PublicLessonDao;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DetailsDaoTest extends BaseTest {
@@ -33,7 +37,7 @@ public class DetailsDaoTest extends BaseTest {
                 +"end\n";
 
 
-
+        /*
         final String studentId = "xx";
         final String classId= "110";
 
@@ -71,6 +75,11 @@ public class DetailsDaoTest extends BaseTest {
             }
         }).start();
         */
+
+        PublicLesson p = new PublicLesson();
+        List<PublicLesson> l = new ArrayList<PublicLesson>();
+        l.add(p);
+
 
     }
 

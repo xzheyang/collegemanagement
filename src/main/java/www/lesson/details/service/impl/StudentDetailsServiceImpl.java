@@ -8,6 +8,8 @@ import www.lesson.pojo.Page;
 import www.lesson.pojo.Student;
 import www.lesson.register.dao.ClassDao;
 import www.lesson.register.dao.StudentDao;
+import www.lesson.vo.StudentSimpleVO;
+
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,6 +38,17 @@ public class StudentDetailsServiceImpl implements StudentDetailsService {
 
     public Student searchStudent(String id) {
         return studentDao.selectByPrimaryKey(id);
+    }
+
+    public StudentSimpleVO searchStudentSimpleVO(String id) {
+
+        String name = studentDao.getNameById(id);
+        String classId = studentDao.getClassIdById(id);
+        Class c = classDao.selectByPrimaryKey(classId);
+
+        StudentSimpleVO studentVO = new StudentSimpleVO(id,name,c);
+
+        return studentVO;
     }
 
 

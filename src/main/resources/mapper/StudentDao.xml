@@ -26,6 +26,20 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
+    <select id="getNameById" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        username
+        from student
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getClassIdById" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        class_id
+        from student
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from student
         where id = #{id,jdbcType=VARCHAR}

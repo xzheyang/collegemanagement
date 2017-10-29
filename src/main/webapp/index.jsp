@@ -2,34 +2,42 @@
 <html>
 <head>
 
+    <%@include file="common/easy-ui.jspf" %>
 </head>
 <body>
-<h2>本网站模仿南通大学信息管理系统而构建</h2>
-由ssm+shiro搭建<br>
-
-详细介绍下载
-<form action="${lesson}/down/myWebGuide" method="get">
-    <input type="submit" value="下载">
-</form>
+<h2 >本网站模仿南通大学信息管理系统而构建</h2>
 
 
+<br>
 
-帐号提供(请不要修改提供的帐号)
-<table>
+<a href="${lesson}/down/myWebGuide" class="easyui-linkbutton" iconCls="icon-tip">详细介绍下载</a>
+
+<br>
+<br>
+
+<table class="easyui-datagrid" title="用户提供(请不要修改密码)" style="width:176px;height:129px">
+    <thead>
     <tr>
-        <td>类别</td><td>帐号</td><td>密码</td>
+        <th >权限</th>
+        <th >用户id</th>
+        <th >用户密码</th>
     </tr>
     <tr>
-        <td>管理员</td><td>1</td><td>1</td>
+        <th>管理员</th><th>1</th><th>1</th>
     </tr>
-        <td>老师</td><td>7</td><td>7</td>
     <tr>
-        <td>学生</td><td>201400101</td><td>1</td>
+        <th>老师</th><th>7</th><th>7</th>
     </tr>
+    <tr>
+        <th>学生</th><th>201400101</th><th>1</th>
+    </tr>
+    </thead>
 </table>
 
 <br>
 <br>
-<a href="${lesson}/login.jsp">由此登录</a>
+
+<a href="${lesson}/login.jsp" class="easyui-linkbutton" iconCls="icon-redo">由此登录</a>
+
 </body>
 </html>

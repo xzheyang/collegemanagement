@@ -61,19 +61,28 @@
     <mvc:resources location="/static/" mapping="/static/**"/>
 
 
-    <!-- shiro没有权限是直接抛出异常,所以需要拦截
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/publicLesson/*"/>
+            <mvc:mapping path="/student/publiclesson/*"/>
+            <bean class="www.lesson.publiclesson.filter.OpenPLChoiceFilter" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
                 <prop key="org.apache.shiro.authz.UnauthorizedException">
-                    redirect:no_permission.jsp
+                    redirect:/no_permission.jsp
                 </prop>
                 <prop key="org.apache.shiro.authz.UnauthenticatedException">
-                    redirect:login_user.jsp
+                    redirect:/logout
                 </prop>
             </props>
         </property>
-    </bean>-->
+    </bean>
 
 
 </beans>

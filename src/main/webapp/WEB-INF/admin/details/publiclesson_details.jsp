@@ -154,7 +154,7 @@
                 //同列属性，但是这些列将会冻结在左侧,z大小不会改变，当宽度大于250时，会显示滚动条，但是冻结的列不在滚动条内
                 frozenColumns:[[
                     {field:'checkbox',checkbox:true},    //复选框
-                    {field:'id',title:'公选课Id',width:300} //id字段
+                    {field:'id',title:'公选课Id',width:100} //id字段
                 ]],
                 columns:[[
                     {field:'name',title:'课程名',width:200},
@@ -168,10 +168,76 @@
         }
 
        );
+
+        //把easy ui屏蔽的onchange重启
+        $(document).ready(function(){
+            //相当于select的onchange事件
+            $('#openChoice').combobox({
+                onChange:function(newValue,oldValue){
+                    //newValue,新值，用户选择后的值
+                    //oldValue,旧值，用户选择前的值
+                    changeOpen(newValue)
+                }
+            });
+        });
+
+
+
+
+
+        $.post( "${lesson}/admin/showPLChoice",
+         function(result){
+              if(result.open){
+                  $('#openChoice').combobox('select','true');
+              }else if(!result.open){
+                  $('#openChoice').combobox('select','false');
+              }else{
+                  $.messager.alert("系统提示","不能获得是否开启公选课");
+              }
+          } ,"json"
+      );
+
+        function changeOpen(flag) {
+
+            $.post("${lesson}/admin/changePLChoice",
+                {open: flag},
+                function(date){
+                if(date.open){
+                    $.messager.alert("系统提示","公选课开启选择");
+                }else{
+                    $.messager.alert("系统提示","公选课关闭选择");
+                }} ,"json"
+                 );
+        }
+
+
     </script>
 </head>
 <body>
 
+<table  width="100%">
+    <tr>
+        <td>
+            允许选择公选课:&nbsp;
+            <input id="openChoice" name="openChoice" class="easyui-combobox" panelHeight="auto"  style="width:66px"
+                    data-options="valueField: 'value',textField: 'label',data: [{
+                   label: '开启',
+                   value: 'true'},
+                   {label: '关闭',
+                   value: 'false'},]"
+            />
+        </td>
+        <td align="right">
+            <a href="${lesson}/admin/downPLExcels"  class="easyui-linkbutton" iconCls="icon-large-chart">导出所有学生选择</a>
+        </td>
+    </tr>
+</table>
+
+
+
+
+<br>
+<br>
 <!-- 显示框 -->
 <table id="dg"></table>
 
@@ -199,14 +265,14 @@
                 </td>
             </tr>
             <tr>
-                <td>老师名</td>
+                <td>老师Id</td>
                 <td>
                     <input type="text" id="teacherId" name="teacherId" class="easyui-validatebox" required="true"
                            style="width:60px">
                 </td>
             </tr>
             <tr>
-                <td>老师Id</td>
+                <td>老师名</td>
                 <td>
                     <input type="text" id="teacherName" name="teacherName" class="easyui-validatebox" required="true"
                            style="width:60px">

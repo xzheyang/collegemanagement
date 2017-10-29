@@ -25,7 +25,7 @@
 <body>
 
 <h2 style="color: red">
-    格式(第一行写属性):  公课程名字, </h2>
+    格式(第一行写属性):  公选课名,指导教师名字,指导教师Id,课程时间,课程学分,人数上限 </h2>
 <form enctype="multipart/form-data" action="${lesson}/admin/insertPublicLessonByExcel" method="post">
     <input type="file" name="file">
     <input type="submit" value="上传">

@@ -1,19 +1,25 @@
 package www.lesson.common.utils;
 
 
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ExcelUtils {
 
@@ -114,6 +120,77 @@ public class ExcelUtils {
 
 
         return value;
+    }
+
+
+    //-------------------------根据数据生成Excel(动态反射)-----------------------------------------------
+
+    public static void downExcel(Map<String,List> forExcel, File file){
+
+        HSSFWorkbook workbook = new HSSFWorkbook();//创建Excel工作簿对象
+        try{
+
+            int w=0;
+
+            for(String key:forExcel.keySet()){
+                HSSFSheet sheet = workbook.createSheet();//在工作簿中创建工作表对象
+                workbook.setSheetName(w++, "publicLesson"+key);//设置工作表的名称
+                List toExcel = forExcel.get(key);//获得单个课程数据
+
+                HSSFRow row = null;//行
+                HSSFCell cell = null;//列
+
+
+                Field[] fileds = toExcel.get(0).getClass().getDeclaredFields();  //获得属性
+                List<String> methodNames = new ArrayList<String>(); //属性方法名
+
+
+
+                row = sheet.createRow(0);//创建第1行
+                //获得属性名,生成方法名和属性类,生成文件头
+                for (int i = 0; i < fileds.length; i++) {
+                    Field field = fileds[i];
+                    //field.setAccessible(true);  //可以操作private
+                    String fieldName = field.getName();
+
+                    cell = row.createCell(i);//新增一列
+                    cell.setCellValue(fieldName); //向单元格中写入数据
+
+                    String methodName ="get"+fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+                    methodNames.add(methodName);//生成属性方法名
+
+                }
+
+
+                //生成属性
+                for (int i = 0; i < toExcel.size(); i++) {
+                    Object values = toExcel.get(i);   //获得转入信息
+
+                    row = sheet.createRow(i+1);//新增一行
+
+                    for (int j = 0; j < methodNames.size(); j++) {
+
+                        Method getMethod = toExcel.get(i).getClass().getMethod(methodNames.get(j));
+                        Object value = getMethod.invoke(values); //获得值
+
+                        cell = row.createCell(j);
+                        cell.setCellValue(value.toString());    //设置值
+                    }
+                }
+
+            }
+
+
+            FileOutputStream fos = new FileOutputStream(file);//创建一个向指定 File 对象表示的文件中写入数据的文件输出流。
+            workbook.write(fos);//将文档对象写入文件输出流
+            fos.close();//关闭流
+
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("解析错误");
+        }
+
+
     }
 
 }

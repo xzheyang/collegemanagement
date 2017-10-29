@@ -24,7 +24,7 @@ public class LessonCUDServiceImpl implements LessonCUDService {
     LessonDao lessonDao;
 
     //现在采取Controller处理异常
-
+    //TODO 详细了解事务,优化事务
 
     //Excel需要 名字,学期(2000/9,2000/3),老师Id,班级Ids(用;隔开),
     public void insertLessons(File file) {

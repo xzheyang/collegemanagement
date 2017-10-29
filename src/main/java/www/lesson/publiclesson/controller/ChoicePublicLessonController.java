@@ -13,19 +13,21 @@ import www.lesson.pojo.PublicLesson;
 import www.lesson.publiclesson.service.ChoicePublicLessonService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequiresRoles("student")
 public class ChoicePublicLessonController {
 
     @Resource(name = "choicePublicLessonServiceImpl")
     ChoicePublicLessonService service;
 
-
+    @RequiresRoles("student")
     @RequestMapping("/publicLesson/insertChoice")
     public void insertPublicLessonChoice(String lessonId, HttpSession session , HttpServletResponse response) throws Exception {
         JSONObject result = new JSONObject();
@@ -46,6 +48,7 @@ public class ChoicePublicLessonController {
         ResponseUtil.write(response, result);
     }
 
+    @RequiresRoles("student")
     @RequestMapping("/publicLesson/deleteChoice")
     public void deletePublicLessonChoice(String lessonId, HttpSession session , HttpServletResponse response) throws Exception {
         JSONObject result = new JSONObject();
@@ -65,6 +68,7 @@ public class ChoicePublicLessonController {
         ResponseUtil.write(response, result);
     }
 
+    @RequiresRoles("student")
     @RequestMapping("/publicLesson/getChoice")
     public void getPublicLessonChoice(String lessonId, HttpSession session , HttpServletResponse response) throws Exception {
         JSONObject result = new JSONObject();
@@ -86,6 +90,22 @@ public class ChoicePublicLessonController {
         ResponseUtil.write(response, result);
     }
 
+    @RequiresRoles("admin")
+    @RequestMapping("/admin/downPLExcels")
+    public void downPLExcels(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String filePath = request.getServletContext().getRealPath("down/publiclessonchoice");
+        File file = new File(filePath,"allPublicLessonChocies.xlsx");
+        service.listChoice(file);
+        ResponseUtil.down(response,file,"allPublicLessonChocies.xlsx");
+    }
 
+    @RequiresRoles("admin")
+    @RequestMapping("/admin/downPLExcelByLessonId")
+    public void downPLExcelByLessonId(HttpServletRequest request,HttpServletResponse response,String publicLessonId) throws IOException {
+        String filePath = request.getServletContext().getRealPath("down/publiclessonchoice");
+        File file = new File(filePath,"publicLessonChocie"+publicLessonId+".xlsx");
+        service.listChoiceByLessonId(publicLessonId,file);
+        ResponseUtil.down(response,file,"publicLessonChocie"+publicLessonId+".xlsx");
+    }
 
 }

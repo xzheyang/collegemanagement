@@ -132,6 +132,7 @@
                                             if(result.success) {
                                                 $.messager.alert("系统提示", "取消报名成功");
 
+                                                $("#dg").datagrid("reload");
                                                 $("#dg2").datagrid("reload");
 
                                                 var rows = $('#dg2').datagrid('getRows');
@@ -155,7 +156,7 @@
         );
     </script>
 </head>
-<body>
+
 <body class="easyui-layout">
 
 <!-- 显示框 -->
