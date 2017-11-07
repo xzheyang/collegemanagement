@@ -1,17 +1,12 @@
 package www.lesson.publiclesson.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import www.lesson.common.utils.ResponseUtil;
-import www.lesson.publiclesson.filter.OpenPLChoiceFilter;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 

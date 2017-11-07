@@ -75,12 +75,13 @@
                data-options="plain:true,iconCls:'icon-'" style="width: 150px">核对分数</a>
         </div>
 
+        <!--
         <div title="课程" data-options="iconCls:'icon-'" style="padding:10px;">
 
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">你的课程</a>
 
-        </div>
+        </div>-->
 
 
 

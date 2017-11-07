@@ -72,18 +72,18 @@
             <a href="javascript:openTab('全部成绩查询','student/score/list_score')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-search'" style="width: 150px">全部成绩查询</a>
 
-            <a href="javascript:openTab('补考成绩查询','')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-search'" style="width: 150px">补考成绩查询</a>
 
         </div>
 
+        <!--
         <div title="课程查询" data-options="iconCls:'icon-'" style="padding:10px;">
+
 
             <a href="#" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-large_chart'" style="width: 150px;">课程表</a>
 
 
-        </div>
+        </div>-->
 
 
 

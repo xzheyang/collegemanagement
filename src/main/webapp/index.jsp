@@ -37,7 +37,7 @@
 <br>
 <br>
 
-<a href="${lesson}/login.jsp" class="easyui-linkbutton" iconCls="icon-redo">由此登录</a>
+<a href="${lesson}/login.jsp" class="easyui-linkbutton" iconCls="icon-redo" >由此登录</a>
 
 </body>
 </html>

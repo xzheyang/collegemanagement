@@ -19,7 +19,7 @@
     <aop:config proxy-target-class="true"> </aop:config>
 
     <!-- 开启springmvc驱动 -->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven ></mvc:annotation-driven>
 
     <!-- 扫描controller -->
     <context:component-scan base-package="www"/>
@@ -66,7 +66,11 @@
         <mvc:interceptor>
             <mvc:mapping path="/publicLesson/*"/>
             <mvc:mapping path="/student/publiclesson/*"/>
-            <bean class="www.lesson.publiclesson.filter.OpenPLChoiceFilter" />
+            <bean class="www.lesson.shiro.interceptor.OpenPLChoiceInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="www.lesson.shiro.interceptor.FileTypeInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 
@@ -83,6 +87,10 @@
             </props>
         </property>
     </bean>
+
+
+
+
 
 
 </beans>

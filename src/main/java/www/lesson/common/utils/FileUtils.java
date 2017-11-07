@@ -5,7 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 public class FileUtils {
@@ -35,6 +37,43 @@ public class FileUtils {
         multfile.transferTo(up);
 
         return up;
+    }
+
+
+
+
+    //读取文件头
+    public static String bytesToHex(byte[] src){
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (int i = 0; i < src.length; i++) {
+            int v = src[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
+    }
+
+    //获取魔数
+    public static String getFileType(MultipartFile file) throws IOException {
+        byte[] ms = new byte[28];
+        InputStream in = null;
+
+        try {
+            in = file.getInputStream();
+            in.read(ms, 0, 28); //读取28位魔数
+        }finally {
+            if(in!=null){
+                in.close();
+            }
+        }
+
+        return bytesToHex(ms).toUpperCase();
     }
 
 }

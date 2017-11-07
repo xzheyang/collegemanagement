@@ -7,15 +7,20 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import www.lesson.common.utils.CopyUtils;
 import www.lesson.common.utils.ResponseUtil;
 import www.lesson.pojo.Page;
 import www.lesson.pojo.User;
 import www.lesson.system.service.SuperUserService;
+import www.lesson.vo.UserSimpleVO;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //管理员用的userController
 @Controller
@@ -28,15 +33,13 @@ public class SuperUserController {
 
     @RequiresRoles("admin")
     @RequestMapping("/admin/searchUser")
-    public String searchUser(@RequestParam(value = "page", required = false) String page,  //当前多少页
+    @ResponseBody
+    public Map searchUser(@RequestParam(value = "page", required = false) String page,  //当前多少页
                              @RequestParam(value = "rows", required = false) String rows,  //有几行
                              String searchType, String searchValue,
                              HttpServletResponse response) throws Exception {
 
-
-        //使用阿里巴巴的fastJson创建JSONObject
-        JSONObject result = new JSONObject();
-
+        Map result = new HashMap();
 
 
         if ("name".equals(searchType)) {
@@ -52,12 +55,9 @@ public class SuperUserController {
 
 
 
-            //通过fastJson序列化list为jsonArray
-            String jsonArray = JSON.toJSONString(pageBean.getResult());
-            JSONArray array = JSONArray.parseArray(jsonArray);
-            //将序列化结果放入json对象中
-            result.put("rows", array);
-            result.put("total", pageBean.getTotal());
+
+            //result.put("rows", array);
+            //result.put("total", pageBean.getTotal());
 
 
 
@@ -65,27 +65,19 @@ public class SuperUserController {
         }else if("id".equals(searchType)){
 
 
-            //TODO 这里需要VO,这里有个漏洞会显示salt和不必要的值
 
             User user = service.getUserById(searchValue);
-            List<User> list = new ArrayList<User>();
-            list.add(user);
+            UserSimpleVO vo = new UserSimpleVO();
+            CopyUtils.copyPojoToVO(user,vo);
+            List list = new ArrayList();
+            list.add(vo);
 
-            //通过fastJson序列化list为jsonArray
-            String jsonArray = JSON.toJSONString(list);
-            JSONArray array = JSONArray.parseArray(jsonArray);
-
-
-            //添加数据
-            result.put("rows", array);
-            result.put("total", 1);
-
+            result.put("rows",list);
+            result.put("total",1);
         }
 
-        //自定义写入数据
-        ResponseUtil.write(response, result);
+        return result;
 
-        return null;
     }
 
 

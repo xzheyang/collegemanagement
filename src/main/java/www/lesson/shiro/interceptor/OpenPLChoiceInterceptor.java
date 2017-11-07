@@ -1,4 +1,4 @@
-package www.lesson.publiclesson.filter;
+package www.lesson.shiro.interceptor;
 
 
 import com.alibaba.fastjson.JSONObject;
@@ -9,7 +9,7 @@ import www.lesson.publiclesson.controller.OpenController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class OpenPLChoiceFilter extends HandlerInterceptorAdapter {
+public class OpenPLChoiceInterceptor extends HandlerInterceptorAdapter {
 
 
 
