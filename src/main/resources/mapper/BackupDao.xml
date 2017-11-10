@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="www.lesson.backup.dao.BackupDao">
+
+    <select id="listAllData" resultType="java.lang.String">
+        SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'score_%';
+    </select>
+
+    <update id="copyAllData" parameterType="java.lang.String" >
+        CREATE TABLE `class_${time}` SELECT * FROM class;
+        CREATE TABLE `student_${time}` SELECT * FROM student;
+        CREATE TABLE `user_${time}` SELECT * FROM `user`;
+        CREATE TABLE `teacher_${time}` SELECT * FROM teacher;
+        CREATE TABLE `lesson_${time}` SELECT * FROM lesson;
+        CREATE TABLE `lesson__class_${time}` SELECT * FROM lesson__class;
+        CREATE TABLE `role_${time}` SELECT * FROM role;
+        CREATE TABLE `score_${time}` SELECT * FROM score;
+    </update>
+
+
+    <update id="restoreAllData" parameterType="java.lang.String" >
+        set FOREIGN_KEY_CHECKS=0;
+
+        DELETE FROM class;
+        DELETE FROM student;
+        DELETE FROM `user`;
+        DELETE FROM teacher;
+        DELETE FROM lesson;
+        DELETE FROM lesson__class;
+        DELETE FROM role;
+        DELETE FROM score;
+
+        INSERT INTO class SELECT * FROM `class_${time}`;
+        INSERT INTO student SELECT * FROM `student_${time}`;
+        INSERT INTO user SELECT * FROM `user_${time}`;
+        INSERT INTO teacher SELECT * FROM `teacher_${time}`;
+        INSERT INTO lesson SELECT * FROM `lesson_${time}`;
+        INSERT INTO lesson__class SELECT * FROM `lesson__class_${time}`;
+        INSERT INTO role SELECT * FROM `role_${time}`;
+        INSERT INTO score SELECT * FROM `score_${time}`;
+
+        set FOREIGN_KEY_CHECKS=1;
+    </update>
+
+    <update id="deleteData" parameterType="java.lang.String" >
+        DROP table `class_${time}`;
+        DROP table `student_${time}`;
+        DROP table `user_${time}`;
+        DROP table `teacher_${time}`;
+        DROP table `lesson_${time}`;
+        DROP table `lesson__class_${time}`;
+        DROP table `role_${time}`;
+        DROP table `score_${time}`;
+    </update>
+
+
+</mapper>

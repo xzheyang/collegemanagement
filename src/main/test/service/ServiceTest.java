@@ -1,15 +1,15 @@
 package service;
 
 import base.BaseTest;
-
 import org.junit.Test;
+import www.lesson.backup.service.BackupService;
 import www.lesson.details.service.ClassDetailsService;
 import www.lesson.details.service.TeacherDetailsService;
-import www.lesson.pojo.PublicLesson;
 import www.lesson.publiclesson.service.ChoicePublicLessonService;
 import www.lesson.publiclesson.service.PublicLessonService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 public class ServiceTest extends BaseTest{
 
@@ -24,6 +24,9 @@ public class ServiceTest extends BaseTest{
 
     @Resource(name = "publicLessonServiceImpl")
     PublicLessonService publicLessonService;
+
+    @Resource(name = "backupServiceImpl")
+    BackupService backupService;
 
     @Test
     public void testServices() {
@@ -40,12 +43,21 @@ public class ServiceTest extends BaseTest{
         publicLessonService.insert(lesson);*/
 
 
-        for(int i=140;i<200;i++){
-            choiceService.insertChoice(String.valueOf(i),"8");
-        }
 
         //System.out.println("测试service"+1);
         //choiceService.deleteChoice("hy","8");
+
+
+        //backupService.copyAllDataNow();
+        //backupService.deleteData();
+
+
+        List<String> result = backupService.listAllData();
+
+        String time = result.get(0);
+        System.out.println(time);
+        backupService.restoreData(time);
+
     }
 
 

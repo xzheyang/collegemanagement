@@ -2,6 +2,7 @@ package dao;
 
 import base.BaseTest;
 import org.junit.Test;
+import www.lesson.backup.service.BackupService;
 import www.lesson.common.utils.ExcelUtils;
 import www.lesson.pojo.Lesson;
 import www.lesson.pojo.PublicLesson;
@@ -20,21 +21,11 @@ public class DetailsDaoTest extends BaseTest {
 
     @Resource(name = "redisPublicLessonDao")
     PublicLessonDao publicLessonDao;
+
+
     @Test
     public void testDetails() {
 
-        String textLua ="if redis.call( 'HEXISTS', hexPublicStudent , KEYS[2] ) ~=0 then\n"
-                + "return false\n"
-                +  "else\n"
-                +"if = redis.call('SCARD', KEYS[3] ) >= 200\n"
-                +"then \n"
-                +"return false \n"
-                +" else\n"
-                +"redis.call('SADD', KEYS[3], KEYS[2] );\n"
-                +"redis.call('HMSET', hexPublicStudent , KEYS[2], KEYS[3]);\n"
-                +"return successed\n"
-                +"end\n"
-                +"end\n";
 
 
         /*
@@ -76,9 +67,7 @@ public class DetailsDaoTest extends BaseTest {
         }).start();
         */
 
-        PublicLesson p = new PublicLesson();
-        List<PublicLesson> l = new ArrayList<PublicLesson>();
-        l.add(p);
+
 
 
     }

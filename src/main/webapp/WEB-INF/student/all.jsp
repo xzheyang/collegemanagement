@@ -70,7 +70,7 @@
         <div title="分数查询" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
 
             <a href="javascript:openTab('全部成绩查询','student/score/list_score')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-search'" style="width: 150px">全部成绩查询</a>
+               data-options="plain:true" style="width: 150px">全部成绩查询</a>
 
 
         </div>

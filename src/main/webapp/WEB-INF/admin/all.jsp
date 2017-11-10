@@ -70,10 +70,10 @@
         <div title="快键管理" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
 
             <a href="javascript:openTab('搜索用户','admin/system/search_user')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-search'" style="width: 150px">搜索用户</a>
+               data-options="plain:true" style="width: 150px">搜索用户</a>
 
-            <a href="javascript:openTab('撤回user操作','admin/')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-up'" style="width: 150px">撤回操作</a>
+            <a href="javascript:openTab('备份还原','admin/system/backup')" class="easyui-linkbutton"
+               data-options="plain:true" style="width: 150px">备份还原</a>
 
 
         </div>

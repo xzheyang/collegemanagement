@@ -24,7 +24,7 @@
 
     <!--    有自带的string的转换器
     <typeHandlers>
-        <typeHandler handler="www.lesson.common.mybatisTypeHandler.StringIntTypeHandler"
+        <typeHandler handler="StringIntTypeHandler"
                  javaType="java.lang.String" jdbcType="INTEGER"/>
     </typeHandlers>-->
 
